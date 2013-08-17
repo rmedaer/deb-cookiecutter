@@ -1,0 +1,17 @@
+Description: Relax dependency on Jinja2 for tests
+Author: Vincent Bernat <bernat@debian.org>
+Forwarded: no
+
+Index: cookiecutter-0.6.1/setup.py
+===================================================================
+--- cookiecutter-0.6.1.orig/setup.py	2013-08-12 14:57:35.000000000 +0200
++++ cookiecutter-0.6.1/setup.py	2013-08-17 22:24:45.267301311 +0200
+@@ -17,7 +17,7 @@
+ readme = open('README.rst').read()
+ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+ 
+-requirements = ['jinja2==2.7']
++requirements = ['jinja2>=2.7']
+ 
+ if sys.version_info[:2] < (2, 7):
+     requirements.append('argparse')

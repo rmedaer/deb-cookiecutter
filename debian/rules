@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+
+export PYBUILD_DESTDIR_python2=debian/python-cookiecutter/
+export PYBUILD_DESTDIR_python3=debian/python3-cookiecutter/
+
+%:
+	dh $@ --with python2,python3,sphinxdoc --buildsystem=pybuild
+
+override_dh_installdocs:
+	dh_installdocs
+	PYTHONPATH=. sphinx-build -N -q -E -b html docs/ \
+		debian/python-cookiecutter-doc/usr/share/doc/python-cookiecutter-doc/html/
+
+override_dh_auto_clean:
+	dh_auto_clean
+	find . \( -name '*.py[co]' -or -name '\._*' -or -name '\.DS_Store' \) -delete
+
+override_dh_install:
+	dh_install
+	# Move cookiecutter executable in its dedicated package
+	mkdir debian/cookiecutter/usr
+	mv debian/python-cookiecutter/usr/bin debian/cookiecutter/usr/.
+	rm -rf debian/python-cookiecutter/usr/bin
+	rm -rf debian/python3-cookiecutter/usr/bin
