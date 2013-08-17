@@ -1,0 +1,75 @@
+Source: cookiecutter
+Section: python
+Priority: optional
+Maintainer: Vincent Bernat <bernat@debian.org>
+Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 7.0.50~), dh-python,
+               python-all, python3-all,
+               python-sphinx (>= 1.0.7+dfsg),
+               python-setuptools, python3-setuptools,
+               python-jinja2, python3-jinja2,
+               python-mock, python3-mock
+Standards-Version: 3.9.4
+Homepage: https://github.com/audreyr/cookiecutter
+Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/cookiecutter/trunk/
+Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/cookiecutter/trunk/
+
+Package: cookiecutter
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends},
+         python-cookiecutter (= ${binary:Version})
+Description: create projects from project templates
+ Cookiecutter is command-line utility that creates projects from
+ project templates, e.g. creating a Python package project from a
+ Python package project template.
+ .
+ It can also be used as a Python module. It supports local and remote
+ templates. The templating is done with Jinja2 and there is no
+ limitation on the language used by the templated projects (Python,
+ Ruby, Javascript, C, HTML, Postscript...).
+
+Package: python-cookiecutter
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}
+Description: create projects from project templates (Python 2 module)
+ Cookiecutter is command-line utility that creates projects from
+ project templates, e.g. creating a Python package project from a
+ Python package project template.
+ .
+ It can also be used as a Python module. It supports local and remote
+ templates. The templating is done with Jinja2 and there is no
+ limitation on the language used by the templated projects (Python,
+ Ruby, Javascript, C, HTML, Postscript...).
+ .
+ This package contains the Python 2 module.
+
+Package: python3-cookiecutter
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends}
+Description: create projects from project templates (Python 3 module)
+ Cookiecutter is command-line utility that creates projects from
+ project templates, e.g. creating a Python package project from a
+ Python package project template.
+ .
+ It can also be used as a Python module. It supports local and remote
+ templates. The templating is done with Jinja2 and there is no
+ limitation on the language used by the templated projects (Python,
+ Ruby, Javascript, C, HTML, Postscript...).
+ .
+ This package contains the Python 3 module.
+
+Package: python-cookiecutter-doc
+Section: doc
+Architecture: all
+Depends: ${sphinxdoc:Depends}, ${misc:Depends}
+Description: create projects from project templates (documentation)
+ Cookiecutter is command-line utility that creates projects from
+ project templates, e.g. creating a Python package project from a
+ Python package project template.
+ .
+ It can also be used as a Python module. It supports local and remote
+ templates. The templating is done with Jinja2 and there is no
+ limitation on the language used by the templated projects (Python,
+ Ruby, Javascript, C, HTML, Postscript...).
+ .
+ This package contains the documentation.
