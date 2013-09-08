@@ -1,3 +1,12 @@
+cookiecutter (0.6.4-1) unstable; urgency=low
+
+  * New upstream version.
+     + Drop patch fixing jinja2 requirement.
+     + Drop patch fixing unicode open with Python3.
+  * Add python-binaryornot as a build-dep.
+
+ -- Vincent Bernat <bernat@debian.org>  Sun, 08 Sep 2013 16:25:50 +0200
+
 cookiecutter (0.6.1-1) unstable; urgency=low
 
   * Initial release. Closes: #720024.

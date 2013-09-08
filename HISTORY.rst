@@ -3,6 +3,29 @@
 History
 -------
 
+0.6.4 (2013-08-21)
+++++++++++++++++++
+
+* Windows support officially added.
+* Fix TemplateNotFound Exception on Windows (#37).
+
+0.6.3 (2013-08-20)
+++++++++++++++++++
+
+* Fix copying of binary files in nested paths (#41), thanks to `@sloria`_.
+
+.. _`@sloria`: https://github.com/sloria/
+
+0.6.2 (2013-08-19)
+++++++++++++++++++
+
+* Depend on Jinja2>=2.4 instead of Jinja2==2.7.
+* Fix errors on attempt to render binary files. Copy them over from the project
+  template without rendering.
+* Fix Python 2.6/2.7 `UnicodeDecodeError` when values containing Unicode chars
+  are in `cookiecutter.json`.
+* Set encoding in Python 3 `unicode_open()` to always be utf-8.
+
 0.6.1 (2013-08-12)
 ++++++++++++++++++
 
