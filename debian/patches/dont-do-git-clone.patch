@@ -2,15 +2,15 @@ Description: Builders don't have access to network, skip this test
 Author: Vincent Bernat <bernat@debian.org>
 Forwarded: no
 
-Index: cookiecutter-0.6.1/tests/test_vcs.py
+Index: cookiecutter-0.6.4/tests/test_vcs.py
 ===================================================================
---- cookiecutter-0.6.1.orig/tests/test_vcs.py	2013-08-12 14:57:35.000000000 +0200
-+++ cookiecutter-0.6.1/tests/test_vcs.py	2013-08-17 22:36:17.415114975 +0200
-@@ -21,6 +21,7 @@
+--- cookiecutter-0.6.4.orig/tests/test_vcs.py	2013-09-08 16:28:04.351120333 +0200
++++ cookiecutter-0.6.4/tests/test_vcs.py	2013-09-08 16:28:04.343120172 +0200
+@@ -33,6 +33,7 @@
  
  class TestVCS(unittest.TestCase):
  
 +    @unittest.skip("disabled, no network")
      def test_git_clone(self):
-         repo_dir = vcs.git_clone('https://github.com/audreyr/cookiecutter-pypackage.git')
-         self.assertEqual(repo_dir, 'cookiecutter-pypackage')
+         repo_dir = vcs.git_clone(
+             'https://github.com/audreyr/cookiecutter-pypackage.git'
