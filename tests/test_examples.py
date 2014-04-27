@@ -8,60 +8,159 @@ test_examples
 Tests for the Cookiecutter example repos.
 """
 
+from __future__ import unicode_literals
+import errno
+import logging
 import os
 import shutil
+import subprocess
 import sys
-import unittest
 
-if sys.version_info[:2] < (2, 7):
+PY3 = sys.version > '3'
+if PY3:
+    from unittest.mock import patch
+    input_str = 'builtins.input'
+    from io import StringIO
+else:
+    import __builtin__
+    from mock import patch
+    input_str = '__builtin__.raw_input'
+    from cStringIO import StringIO
+
+if sys.version_info[:3] < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
 
+try:
+    travis = os.environ[u'TRAVIS']
+except KeyError:
+    travis = False
 
-@unittest.skip(reason='Works locally with tox but fails on Travis.')
-class TestPyPackage(unittest.TestCase):
+from cookiecutter import config, utils
+from tests import force_delete, CookiecutterCleanSystemTestCase
+
+
+logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.DEBUG)
+
+
+@unittest.skipIf(condition=travis, reason='Works locally with tox but fails on Travis.')
+class TestPyPackage(CookiecutterCleanSystemTestCase):
+
+
+    def tearDown(self):
+        if os.path.isdir('cookiecutter-pypackage'):
+            shutil.rmtree('cookiecutter-pypackage', onerror=force_delete)
+        if os.path.isdir('boilerplate'):
+            shutil.rmtree('boilerplate', onerror=force_delete)
+        super(TestPyPackage, self).tearDown()
 
     def test_cookiecutter_pypackage(self):
         """
         Tests that https://github.com/audreyr/cookiecutter-pypackage.git works.
         """
 
-        os.system('git clone https://github.com/audreyr/cookiecutter-pypackage.git')
-        os.system('cookiecutter cookiecutter-pypackage/')
-        self.assertTrue(os.path.isfile('cookiecutter-pypackage/alotofeffort/README.rst'))
+        proc = subprocess.Popen(
+            'git clone https://github.com/audreyr/cookiecutter-pypackage.git',
+            stdin=subprocess.PIPE,
+            shell=True
+        )
+        proc.wait()
+
+        proc = subprocess.Popen(
+            'cookiecutter --no-input cookiecutter-pypackage/',
+            stdin=subprocess.PIPE,
+            shell=True
+        )
+        proc.wait()
+
+        self.assertTrue(os.path.isdir('cookiecutter-pypackage'))
+        self.assertTrue(os.path.isfile('boilerplate/README.rst'))
+
+
+@unittest.skipIf(condition=travis, reason='Works locally with tox but fails on Travis.')
+class TestJQuery(CookiecutterCleanSystemTestCase):
+
 
     def tearDown(self):
-        if os.path.isdir('cookiecutter-pypackage'):
-            shutil.rmtree('cookiecutter-pypackage')
-
-@unittest.skip(reason='Works locally with tox but fails on Travis.')
-class TestJQuery(unittest.TestCase):
+        if os.path.isdir('cookiecutter-jquery'):
+            shutil.rmtree('cookiecutter-jquery', onerror=force_delete)
+        if os.path.isdir('boilerplate'):
+            shutil.rmtree('boilerplate', onerror=force_delete)
+        super(TestJQuery, self).tearDown()
 
     def test_cookiecutter_jquery(self):
         """
         Tests that https://github.com/audreyr/cookiecutter-jquery.git works.
         """
 
-        os.system('git clone https://github.com/audreyr/cookiecutter-jquery.git')
-        os.system('cookiecutter cookiecutter-jquery/')
-        self.assertTrue(os.path.isfile('cookiecutter-jquery/boilerplate/README.md'))
+        proc = subprocess.Popen(
+            'git clone https://github.com/audreyr/cookiecutter-jquery.git',
+            stdin=subprocess.PIPE,
+            shell=True
+        )
+        proc.wait()
+
+        proc = subprocess.Popen(
+            'cookiecutter --no-input cookiecutter-jquery/',
+            stdin=subprocess.PIPE,
+            shell=True
+        )
+        proc.wait()
+
+        self.assertTrue(os.path.isdir('cookiecutter-jquery'))
+        self.assertTrue(os.path.isfile('boilerplate/README.md'))
+
+
+@unittest.skipIf(condition=travis, reason='Works locally with tox but fails on Travis.')
+class TestExamplesRepoArg(CookiecutterCleanSystemTestCase):
 
     def tearDown(self):
-        if os.path.isdir('cookiecutter-jquery'):
-            shutil.rmtree('cookiecutter-jquery')
+        with utils.work_in(config.DEFAULT_CONFIG['cookiecutters_dir']):
+            if os.path.isdir('cookiecutter-pypackage'):
+                shutil.rmtree('cookiecutter-pypackage', onerror=force_delete)
+        if os.path.isdir('boilerplate'):
+            shutil.rmtree('boilerplate', onerror=force_delete)
+        super(TestExamplesRepoArg, self).tearDown()
 
-@unittest.skip(reason='Works locally with tox but fails on Travis.')
-class TestExamplesRepoArg(unittest.TestCase):
-    
     def test_cookiecutter_pypackage_git(self):
-        os.system('cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git')
-        self.assertTrue(os.path.isfile('alotofeffort/README.rst'))
+        proc = subprocess.Popen(
+            'cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git',
+            stdin=subprocess.PIPE,
+            shell=True
+        )
+
+        # Just skip all the prompts
+        proc.communicate(input=b'\n\n\n\n\n\n\n\n\n\n\n\n')
+        
+        self.assertTrue(os.path.isfile('boilerplate/README.rst'))
+
+
+
+@unittest.skipIf(condition=travis, reason='Works locally with tox but fails on Travis.')
+class TestGitBranch(CookiecutterCleanSystemTestCase):
 
     def tearDown(self):
-        if os.path.isdir('alotofeffort'):
-            shutil.rmtree('alotofeffort')
+        with utils.work_in(config.DEFAULT_CONFIG['cookiecutters_dir']):
+            if os.path.isdir('cookiecutter-pypackage'):
+                shutil.rmtree('cookiecutter-pypackage', onerror=force_delete)
+        if os.path.isdir('boilerplate'):
+            shutil.rmtree('boilerplate', onerror=force_delete)
+        super(TestGitBranch, self).tearDown()
 
-        
+    def test_branch(self):
+        proc = subprocess.Popen(
+            'cookiecutter -c console-script https://github.com/audreyr/cookiecutter-pypackage.git',
+            stdin=subprocess.PIPE,
+            shell=True
+        )
+
+        # Just skip all the prompts
+        proc.communicate(input=b'\n\n\n\n\n\n\n\n\n\n\n\n')
+
+        self.assertTrue(os.path.isfile('boilerplate/README.rst'))
+        self.assertTrue(os.path.isfile('boilerplate/boilerplate/main.py'))
+
+
 if __name__ == '__main__':
     unittest.main()

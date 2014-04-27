@@ -44,20 +44,25 @@ defined in the project's `cookiecutter.json`.
 Then, Cookiecutter will generate a project from the template, using the values
 that you entered. It will be placed in your current directory.
 
-Or hook directly into the Cookiecutter API
-------------------------------------------
+And if you want to specify a branch you can do that with::
 
-You can use Cookiecutter from Python::
+    $ cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git --checkout develop
 
-    from cookiecutter.main import cookiecutter
-    
-    # Create project from the cookiecutter-pypackage/ template
-    cookiecutter('cookiecutter-pypackage/')
+Keeping your cookiecutters organized
+------------------------------------
 
-    # Create project from the cookiecutter-pypackage.git repo template
-    cookiecutter('https://github.com/audreyr/cookiecutter-pypackage.git')
-    
-See the :ref:`API Reference` for more details.
+As of the upcoming Cookiecutter 0.7.0 release:
 
-If you use it in an interesting way, I'd love to hear about it: file an issue,
-please!
+* Whenever you generate a project with a cookiecutter, the resulting project
+  is output to your current directory.
+
+* Your cloned cookiecutters are stored by default in your `~/.cookiecutters/`
+  directory (or Windows equivalent). The location is configurable: see
+  :doc:`advanced_usage` for details.
+
+Pre-0.7.0, this is how it worked:
+
+* Whenever you generate a project with a cookiecutter, the resulting project
+  is output to your current directory.
+
+* Cloned cookiecutters were not saved locally.

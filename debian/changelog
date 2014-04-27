@@ -1,3 +1,13 @@
+cookiecutter (0.7.1-1) unstable; urgency=low
+
+  * New upstream release. Closes: #733567.
+     + Drop all patches are that are not needed any more.
+     + Build-Depends on python{,3}-yaml.
+  * Add patch to disable network tests.
+  * Add patch to handle .DS_Store (stripped by svn-upgrade).
+
+ -- Vincent Bernat <bernat@debian.org>  Sun, 27 Apr 2014 12:01:02 +0200
+
 cookiecutter (0.6.4-1) unstable; urgency=low
 
   * New upstream version.

@@ -1,2 +1,2 @@
-dont-do-git-clone.patch
-dont-test-with-dstore-files.patch
+test-dont-expect-ds-store.patch
+disable-network-tests.patch

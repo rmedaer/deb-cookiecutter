@@ -13,7 +13,8 @@ Types of Contributions
 Create Cookiecutter Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Some other Cookiecutter templates to list in the :doc:`README` would be great.
+Some other Cookiecutter templates to list in the :ref:`README <readme>` would
+be great.
 
 If you create a Cookiecutter template, submit a pull request adding it to
 README.rst.
@@ -27,7 +28,10 @@ If you are reporting a bug, please include:
 
 * Your operating system name and version.
 * Any details about your local setup that might be helpful in troubleshooting.
-* Detailed steps to reproduce the bug.
+* If you can, provide detailed steps to reproduce the bug.
+* If you don't have steps to reproduce the bug, just note your observations in
+  as much detail as you can. Questions to start a discussion about the issue
+  are welcome.
 
 Fix Bugs
 ~~~~~~~~
@@ -87,7 +91,7 @@ Now you can make your changes locally.
 5. When you're done making changes, check that your changes pass the tests and flake8::
 
     $ flake8 cookiecutter tests
-	$ python setup.py test
+    $ python setup.py test
     $ tox
 
 6. Commit your changes and push your branch to GitHub::
@@ -114,16 +118,16 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 2.6, 2.7, 3.3, and PyPy. Check
-   https://travis-ci.org/audreyr/complexity/pull_requests and make sure that
+   https://travis-ci.org/audreyr/cookiecutter/pull_requests and make sure that
    the tests pass for all supported Python versions.
 
 Tips
 ----
 
 To run a particular test::
-	
-	$ python -m unittest tests.test_find.TestFind.test_find_template
-	
+
+    $ python -m unittest tests.test_find.TestFind.test_find_template
+
 To run a subset of tests::
 
-	$ python -m unittest tests.test_find
+    $ python -m unittest tests.test_find

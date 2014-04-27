@@ -4,6 +4,7 @@
 export PYBUILD_DESTDIR_python2=debian/python-cookiecutter/
 export PYBUILD_DESTDIR_python3=debian/python3-cookiecutter/
 export LC_ALL=C.UTF-8
+export DISABLE_NETWORK_TESTS=1
 
 %:
 	dh $@ --with python2,python3,sphinxdoc --buildsystem=pybuild
