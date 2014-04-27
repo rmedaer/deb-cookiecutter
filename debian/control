@@ -11,7 +11,7 @@ Build-Depends: debhelper (>= 7.0.50~), dh-python,
                python-mock, python3-mock,
                python-binaryornot, python3-binaryornot,
                python-yaml, python3-yaml
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 Homepage: https://github.com/audreyr/cookiecutter
 Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/cookiecutter/trunk/
 Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/cookiecutter/trunk/
