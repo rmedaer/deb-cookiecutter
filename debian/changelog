@@ -1,6 +1,7 @@
 cookiecutter (0.7.2-1) unstable; urgency=medium
 
   * New upstream release
+     + Drop network related patch, not needed anymore.
 
  -- Vincent Bernat <bernat@debian.org>  Sun, 28 Sep 2014 10:00:14 +0200
 
