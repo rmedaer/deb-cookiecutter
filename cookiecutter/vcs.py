@@ -11,19 +11,19 @@ Helper functions for working with version control systems.
 from __future__ import unicode_literals
 import logging
 import os
-import shutil
 import subprocess
 import sys
 
 from .exceptions import UnknownRepoType
 from .prompt import query_yes_no
-from .utils import make_sure_path_exists
+from .utils import make_sure_path_exists, rmtree
 
 
 def prompt_and_delete_repo(repo_dir):
     """
     Asks the user whether it's okay to delete the previously-cloned repo.
     If yes, deletes it. Otherwise, Cookiecutter exits.
+
     :param repo_dir: Directory of previously-cloned repo.
     """
 
@@ -32,7 +32,7 @@ def prompt_and_delete_repo(repo_dir):
         default="yes"
     )
     if ok_to_delete:
-        shutil.rmtree(repo_dir)
+        rmtree(repo_dir)
     else:
         sys.exit()
 
@@ -40,10 +40,11 @@ def prompt_and_delete_repo(repo_dir):
 def identify_repo(repo_url):
     """
     Determines if `repo_url` should be treated as a URL to a git or hg repo.
+
     :param repo_url: Repo URL of unknown type.
     :returns: "git", "hg", or None.
     """
-    
+
     if "git" in repo_url:
         return "git"
     elif "bitbucket" in repo_url:
@@ -63,9 +64,9 @@ def clone(repo_url, checkout=None, clone_to_dir="."):
     # Ensure that clone_to_dir exists
     clone_to_dir = os.path.expanduser(clone_to_dir)
     make_sure_path_exists(clone_to_dir)
-    
+
     repo_type = identify_repo(repo_url)
-    
+
     tail = os.path.split(repo_url)[1]
     if repo_type == "git":
         repo_dir = os.path.normpath(os.path.join(clone_to_dir, tail.rsplit('.git')[0]))
