@@ -2,25 +2,19 @@ Subject: .DS_Store is stripped out by SVN, don't expect it
 Author: Vincent Bernat
 Forwarded: no
 
-Index: cookiecutter-0.7.2/tests/test_generate.py
+Index: cookiecutter-1.0.0/tests/test_generate_files.py
 ===================================================================
---- cookiecutter-0.7.2.orig/tests/test_generate.py
-+++ cookiecutter-0.7.2/tests/test_generate.py
-@@ -118,7 +118,6 @@ class TestGenerateFiles(CookiecutterClea
-             repo_dir='tests/test-generate-binaries'
-         )
-         self.assertTrue(os.path.isfile('inputbinary_files/logo.png'))
--        self.assertTrue(os.path.isfile('inputbinary_files/.DS_Store'))
-         self.assertTrue(os.path.isfile('inputbinary_files/readme.txt'))
-         self.assertTrue(
-             os.path.isfile('inputbinary_files/some_font.otf')
-@@ -127,9 +126,6 @@ class TestGenerateFiles(CookiecutterClea
-             os.path.isfile('inputbinary_files/binary_files/logo.png')
-         )
-         self.assertTrue(
--            os.path.isfile('inputbinary_files/binary_files/.DS_Store')
--        )
--        self.assertTrue(
-             os.path.isfile('inputbinary_files/binary_files/readme.txt')
-         )
-         self.assertTrue(
+--- cookiecutter-1.0.0.orig/tests/test_generate_files.py
++++ cookiecutter-1.0.0/tests/test_generate_files.py
+@@ -107,11 +107,9 @@ def test_generate_files_binaries():
+     )
+ 
+     assert os.path.isfile('inputbinary_files/logo.png')
+-    assert os.path.isfile('inputbinary_files/.DS_Store')
+     assert os.path.isfile('inputbinary_files/readme.txt')
+     assert os.path.isfile('inputbinary_files/some_font.otf')
+     assert os.path.isfile('inputbinary_files/binary_files/logo.png')
+-    assert os.path.isfile('inputbinary_files/binary_files/.DS_Store')
+     assert os.path.isfile('inputbinary_files/binary_files/readme.txt')
+     assert os.path.isfile('inputbinary_files/binary_files/some_font.otf')
+     assert os.path.isfile(

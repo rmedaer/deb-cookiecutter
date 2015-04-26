@@ -1,0 +1,41 @@
+From f11016b94d281552d71eb3c75bb81609829751a4 Mon Sep 17 00:00:00 2001
+From: Vincent Bernat <vincent@bernat.im>
+Date: Sun, 26 Apr 2015 18:04:42 +0200
+Subject: [PATCH] tests: ensure to use an existing command to test `which`
+
+When testing cookiecutter while not having it installed, we get this
+failure:
+
+    =================================== FAILURES ===================================
+    ____________________________ test_existing_command _____________________________
+
+        def test_existing_command():
+    >       assert which('cookiecutter')
+    E       assert None
+    E        +  where None = which('cookiecutter')
+
+    tests/test_compat.py:15: AssertionError
+    =============== 1 failed, 74 passed, 16 skipped in 0.43 seconds ================
+
+A command that is almost guaranteed to exist is `date` (both on Unix and
+Windows systems).
+---
+ tests/test_compat.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/test_compat.py b/tests/test_compat.py
+index d2b2b4a612fa..05a3bfb93143 100644
+--- a/tests/test_compat.py
++++ b/tests/test_compat.py
+@@ -12,7 +12,7 @@ from cookiecutter.compat import which
+ 
+ 
+ def test_existing_command():
+-    assert which('cookiecutter')
++    assert which('date')
+ 
+ 
+ def test_non_existing_command():
+-- 
+2.1.4
+

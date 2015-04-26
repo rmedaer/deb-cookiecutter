@@ -1,3 +1,13 @@
+cookiecutter (1.0.0-1) unstable; urgency=medium
+
+  * New upstream release
+     + Refresh patch.
+     + Depends on pytest to run tests.
+     + Depends on python-click for CLI. Install git as well.
+  * Bump Standards-Version. No changes.
+
+ -- Vincent Bernat <bernat@debian.org>  Sun, 26 Apr 2015 17:36:13 +0200
+
 cookiecutter (0.7.2-1) unstable; urgency=medium
 
   * New upstream release
