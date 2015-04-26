@@ -4,14 +4,17 @@ Priority: optional
 Maintainer: Vincent Bernat <bernat@debian.org>
 Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
 Build-Depends: debhelper (>= 7.0.50~), dh-python,
+               git,
                python-all, python3-all,
                python-sphinx (>= 1.0.7+dfsg),
                python-setuptools, python3-setuptools,
                python-jinja2, python3-jinja2,
                python-mock, python3-mock,
                python-binaryornot, python3-binaryornot,
-               python-yaml, python3-yaml
-Standards-Version: 3.9.5
+               python-yaml, python3-yaml,
+               python-pytest, python3-pytest,
+               python-click, python3-click
+Standards-Version: 3.9.6
 Homepage: https://github.com/audreyr/cookiecutter
 Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/cookiecutter/trunk/
 Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/cookiecutter/trunk/
