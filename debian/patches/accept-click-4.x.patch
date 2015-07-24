@@ -1,0 +1,16 @@
+Description: Cookiecutter works fine with click 4.x.
+Forwarded: not-needed
+
+Index: cookiecutter-1.0.0/setup.py
+===================================================================
+--- cookiecutter-1.0.0.orig/setup.py
++++ cookiecutter-1.0.0/setup.py
+@@ -23,7 +23,7 @@ if sys.argv[-1] == 'tag':
+ readme = open('README.rst').read()
+ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+ 
+-requirements = ['binaryornot>=0.2.0', 'jinja2>=2.7', 'PyYAML>=3.10', 'click<4.0']
++requirements = ['binaryornot>=0.2.0', 'jinja2>=2.7', 'PyYAML>=3.10', 'click<5.0']
+ test_requirements = ['pytest']
+ 
+ # Add Python 2.6-specific dependencies
