@@ -1,3 +1,9 @@
+cookiecutter (1.0.0-3) unstable; urgency=medium
+
+  * Update click patch to accept any version.
+
+ -- Vincent Bernat <bernat@debian.org>  Thu, 27 Aug 2015 19:24:12 +0200
+
 cookiecutter (1.0.0-2) unstable; urgency=medium
 
   * Add a patch for compatibility with click 4.x. Closes: #793525.
