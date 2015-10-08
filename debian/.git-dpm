@@ -6,3 +6,6 @@ e0b45044355244a6cee70afa49fca8d63ff44dca
 cookiecutter_1.0.0.orig.tar.gz
 0edab6e67655a41f85c79e8424df466b76e3e9cc
 114813
+debianTag="debian/%e%v"
+patchedTag="patched/%e%v"
+upstreamTag="upstream/%e%u"
