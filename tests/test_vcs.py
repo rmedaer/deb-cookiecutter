@@ -11,7 +11,6 @@ Tests for `cookiecutter.vcs` module.
 import locale
 import logging
 import os
-import shutil
 import subprocess
 import sys
 import unittest
@@ -26,7 +25,17 @@ else:
     input_str = '__builtin__.raw_input'
     from cStringIO import StringIO
 
+if sys.version_info[:3] < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
+
 from cookiecutter import utils, vcs
+
+try:
+    no_network = os.environ[u'DISABLE_NETWORK_TESTS']
+except KeyError:
+    no_network = False
 
 
 # Log debug and above to console
@@ -53,6 +62,7 @@ class TestIdentifyRepo(unittest.TestCase):
         self.assertEqual(vcs.identify_repo(repo_url), "hg")
 
 
+@unittest.skipIf(condition=no_network, reason='Needs a network connection to GitHub/Bitbucket.')
 class TestVCS(unittest.TestCase):
 
     def test_git_clone(self):
@@ -62,7 +72,7 @@ class TestVCS(unittest.TestCase):
         self.assertEqual(repo_dir, 'cookiecutter-pypackage')
         self.assertTrue(os.path.isfile('cookiecutter-pypackage/README.rst'))
         if os.path.isdir('cookiecutter-pypackage'):
-            shutil.rmtree('cookiecutter-pypackage')
+            utils.rmtree('cookiecutter-pypackage')
 
     def test_git_clone_checkout(self):
         repo_dir = vcs.clone(
@@ -83,7 +93,7 @@ class TestVCS(unittest.TestCase):
         self.assertEqual('console-script', branch)
 
         if os.path.isdir(git_dir):
-            shutil.rmtree(git_dir)
+            utils.rmtree(git_dir)
 
     def test_git_clone_custom_dir(self):
         os.makedirs("tests/custom_dir1/custom_dir2/")
@@ -97,9 +107,9 @@ class TestVCS(unittest.TestCase):
             self.assertEqual(repo_dir, test_dir)
             self.assertTrue(os.path.isfile('cookiecutter-pypackage/README.rst'))
             if os.path.isdir('cookiecutter-pypackage'):
-                shutil.rmtree('cookiecutter-pypackage')
+                utils.rmtree('cookiecutter-pypackage')
         if os.path.isdir('tests/custom_dir1'):
-            shutil.rmtree('tests/custom_dir1')
+            utils.rmtree('tests/custom_dir1')
 
     def test_hg_clone(self):
         repo_dir = vcs.clone(
@@ -108,17 +118,18 @@ class TestVCS(unittest.TestCase):
         self.assertEqual(repo_dir, 'cookiecutter-trytonmodule')
         self.assertTrue(os.path.isfile('cookiecutter-trytonmodule/README.rst'))
         if os.path.isdir('cookiecutter-trytonmodule'):
-            shutil.rmtree('cookiecutter-trytonmodule')
+            utils.rmtree('cookiecutter-trytonmodule')
 
 
+@unittest.skipIf(condition=no_network, reason='Needs a network connection to GitHub/Bitbucket.')
 class TestVCSPrompt(unittest.TestCase):
 
     def setUp(self):
         if os.path.isdir('cookiecutter-pypackage'):
-            shutil.rmtree('cookiecutter-pypackage')
+            utils.rmtree('cookiecutter-pypackage')
         os.mkdir('cookiecutter-pypackage/')
         if os.path.isdir('cookiecutter-trytonmodule'):
-            shutil.rmtree('cookiecutter-trytonmodule')
+            utils.rmtree('cookiecutter-trytonmodule')
         os.mkdir('cookiecutter-trytonmodule/')
 
     @patch(input_str, lambda: 'y')
@@ -163,9 +174,9 @@ class TestVCSPrompt(unittest.TestCase):
 
     def tearDown(self):
         if os.path.isdir('cookiecutter-pypackage'):
-            shutil.rmtree('cookiecutter-pypackage')
+            utils.rmtree('cookiecutter-pypackage')
         if os.path.isdir('cookiecutter-trytonmodule'):
-            shutil.rmtree('cookiecutter-trytonmodule')
+            utils.rmtree('cookiecutter-trytonmodule')
 
 
 if __name__ == '__main__':
