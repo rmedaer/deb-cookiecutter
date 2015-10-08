@@ -47,6 +47,10 @@ If you use Cookiecutter a lot, you'll find it useful to have a
         email: "audreyr@gmail.com"
         github_username: "audreyr"
     cookiecutters_dir: "/home/audreyr/my-custom-cookiecutters-dir/"
+    abbreviations:
+        pp: https://github.com/audreyr/cookiecutter-pypackage.git
+        gh: https://github.com/{0}.git
+        bb: https://bitbucket.org/{0}
 
 Possible settings are:
 
@@ -55,6 +59,14 @@ Possible settings are:
   like the defaults in `cookiecutter.json`, upon generation of any project.
 * cookiecutters_dir: Directory where your cookiecutters are cloned to when you
   use Cookiecutter with a repo argument.
+* abbreviations: A list of abbreviations for cookiecutters. Abbreviations can
+  be simple aliases for a repo name, or can be used as a prefix, in the form
+  `abbr:suffix`. Any suffix will be inserted into the expansion in place of
+  the text `{0}`, using standard Python string formatting.  With the above
+  aliases, you could use the `cookiecutter-pypackage` template simply by saying
+  `cookiecutter pp`, or `cookiecutter gh:audreyr/cookiecutter-pypackage`.
+  The `gh` (github) and `bb` (bitbucket) abbreviations shown above are actually
+  built in, and can be used without defining them yourself.
 
 Calling Cookiecutter Functions From Python
 ------------------------------------------
@@ -73,7 +85,96 @@ This is useful if, for example, you're writing a web framework and need to
 provide developers with a tool similar to `django-admin.py startproject` or
 `npm init`.
 
+Injecting Extra Context
+-----------------------
+
+You can specify an `extra_context` dictionary that will override values from `cookiecutter.json` or `.cookiecutterrc`::
+
+    cookiecutter('cookiecutter-pypackage/',
+                 extra_context={'project_name': 'TheGreatest'})
+
+Example: Injecting a Timestamp
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is a sample Python script that dynamically injects a timestamp value
+as a project is generated::
+
+    from cookiecutter.main import cookiecutter
+
+    from datetime import datetime
+
+    cookiecutter(
+        'cookiecutter-django',
+        extra_context={'timestamp': datetime.utcnow().isoformat()}
+    )
+
+How this works:
+
+1. The script uses `datetime` to get the current UTC time in ISO format.
+2. To generate the project, `cookiecutter()` is called, passing the timestamp
+   in as context via the `extra_context` dict.
+
+Suppressing Command-Line Prompts
+--------------------------------
+
+To suppress the prompts asking for input, use `no_input`.
+
+Basic Example: Using the Defaults
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO: document `no_input`:
+
+* As command-line argument
+* As parameter of `cookiecutter()`
+
+TODO: document where context values come from in this example (`cookiecutter.json` and `.cookiecutterrc`)
+
+Advanced Example: Defaults + Extra Context
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you combine an `extra_context` dict with the `no_input` argument, you can programmatically create the project with a set list of context parameters and without any command line prompts::
+
+    cookiecutter('cookiecutter-pypackage/',
+                 no_input=True,
+                 extra_context={'project_name': 'TheGreatest'})
+
 See the :ref:`API Reference <apiref>` for more details.
+
+Templates in Context Values
+--------------------------------
+
+The values (but not the keys!) of `cookiecutter.json` are also Jinja2 templates.
+Values from user prompts are added to the context immediately, such that one
+context value can be derived from previous values. This approach can potentially
+save your user a lot of keystrokes by providing more sensible defaults.
+
+Basic Example: Templates in Context
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Python packages show some patterns for their naming conventions:
+
+* a human-readable project name
+* a lowercase, dashed repository name
+* an importable, dash-less package name
+
+Here is a `cookiecuttter.json` with templated values for this pattern::
+
+    {
+      "project_name": "My New Project",
+      "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+      "pkg_name": "{{ cookiecutter.repo_name|replace('-', '') }}"
+    }
+
+If the user takes the defaults, or uses `no_input`, the templated values will 
+be:
+
+* `my-new-project`
+* `mynewproject`
+
+Or, if the user gives `Yet Another New Project`, the values will be:
+
+* `yet-another-new-project`
+* `yetanothernewproject`
 
 
 .. _command_line_options:

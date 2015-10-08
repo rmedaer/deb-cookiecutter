@@ -11,41 +11,39 @@ Functions for prompting the user for project info.
 from __future__ import unicode_literals
 import sys
 
-PY3 = sys.version > '3'
-if PY3:
-    iteritems = lambda d: iter(d.items())
-else:
-    input = raw_input
-    iteritems = lambda d: d.iteritems()
+from .compat import iteritems, read_response, is_string
+from jinja2.environment import Environment
 
 
-def prompt_for_config(context):
+def prompt_for_config(context, no_input=False):
     """
     Prompts the user to enter new config, using context as a source for the
     field names and sample values.
+
+    :param no_input: Prompt the user at command line for manual configuration?
     """
     cookiecutter_dict = {}
+    env = Environment()
 
-    for key, val in iteritems(context['cookiecutter']):
-        prompt = "{0} (default is \"{1}\")? ".format(key, val)
+    for key, raw in iteritems(context['cookiecutter']):
+        raw = raw if is_string(raw) else str(raw)
+        val = env.from_string(raw).render(cookiecutter=cookiecutter_dict)
 
-        if PY3:
-            new_val = input(prompt)
-        else:
-            new_val = input(prompt.encode('utf-8')).decode('utf-8')
+        if not no_input:
+            prompt = '{0} (default is "{1}")? '.format(key, val)
 
-        new_val = new_val.strip()
+            new_val = read_response(prompt).strip()
 
-        if new_val == '':
-            new_val = val
+            if new_val != '':
+                val = new_val
 
-        cookiecutter_dict[key] = new_val
+        cookiecutter_dict[key] = val
     return cookiecutter_dict
 
 
-def query_yes_no(question, default="yes"):
+def query_yes_no(question, default='yes'):
     """
-    Ask a yes/no question via `raw_input()` and return their answer.
+    Ask a yes/no question via `read_response()` and return their answer.
 
     :param question: A string that is presented to the user.
     :param default: The presumed answer if the user just hits <Enter>.
@@ -59,24 +57,24 @@ def query_yes_no(question, default="yes"):
     http://code.activestate.com/recipes/577058/
 
     """
-    valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
+    valid = {'yes': True, 'y': True, 'ye': True, 'no': False, 'n': False}
     if default is None:
-        prompt = " [y/n] "
-    elif default == "yes":
-        prompt = " [Y/n] "
-    elif default == "no":
-        prompt = " [y/N] "
+        prompt = ' [y/n] '
+    elif default == 'yes':
+        prompt = ' [Y/n] '
+    elif default == 'no':
+        prompt = ' [y/N] '
     else:
-        raise ValueError("invalid default answer: '%s'" % default)
+        raise ValueError('Invalid default answer: "{0}"'.format(default))
 
     while True:
         sys.stdout.write(question + prompt)
-        choice = input().lower()
+        choice = read_response().lower()
 
         if default is not None and choice == '':
             return valid[default]
         elif choice in valid:
             return valid[choice]
         else:
-            sys.stdout.write("Please respond with 'yes' or 'no' "
-                             "(or 'y' or 'n').\n")
+            sys.stdout.write('Please respond with "yes" or "no" '
+                             '(or "y" or "n").\n')
