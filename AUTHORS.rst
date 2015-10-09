@@ -2,17 +2,18 @@
 Credits
 =======
 
-Development Lead
-----------------
+Development Leads
+-----------------
 
-* Audrey Roy <audreyr@gmail.com>
+* Audrey Roy Greenfeld (`@audreyr`_)
+* Daniel Roy Greenfeld (`@pydanny`_)
 
 Core Committers
 ---------------
 
-* Daniel Greenfeld (`@pydanny`_)
 * Michael Joseph (`@michaeljoseph`_)
 * Paul Moore (`@pfmoore`_)
+* Raphael Pierzina (`@hackebrot`_)
 
 Contributors
 ------------
@@ -42,7 +43,6 @@ Contributors
 * Dave Dash (`@davedash`_)
 * Johan Charpentier (`@cyberj`_)
 * Éric Araujo (`@merwok`_)
-* Raphael Pierzina (`@hackebrot`_)
 * saxix (`@saxix`_)
 * Tzu-ping Chung (`@uranusjr`_)
 * Caleb Hattingh (`@cjrh`_)
@@ -65,7 +65,21 @@ Contributors
 * Randy Syring (`@rsyring`_)
 * Mark Jones (`@mark0978`_)
 * Marc Abramowitz (`@msabramo`_)
+* Lucian Ursu (`@LucianU`_)
+* Osvaldo Santana Neto (`@osantana`_)
+* Matthias84 (`@Matthias84`_)
+* Simeon Visser (`@svisser`_)
+* Guruprasad (`@lgp171188`_)
+* Charles-Axel Dein (`@charlax`_)
+* Diego Garcia (`@drgarcia1986`_)
+* maiksensi (`@maiksensi`_)
+* Andrew Conti (`@agconti`_)
+* Valentin Lab (`@vaab`_)
 
+.. _`@maiksensi`: https://github.com/maiksensi
+.. _`@svisser`: https://github.com/svisser
+.. _`@LucianU`: https://github.com/LucianU
+.. _`@osantana`: https://github.com/osantana
 .. _`@msabramo`: https://github.com/msabramo
 .. _`@mark0978`: https://github.com/mark0978
 .. _`@rsyring`: https://github.com/rsyring
@@ -107,7 +121,7 @@ Contributors
 .. _`@emonty`: https://github.com/emonty
 .. _`@schacki`: https://github.com/schacki
 .. _`@ryanolson`: https://github.com/ryanolson
-.. _`@treyhunner`: https://github.com/treyhunner 
+.. _`@treyhunner`: https://github.com/treyhunner
 .. _`@freakboy3742`: https://github.com/freakboy3742
 .. _`@mishbahr`: https://github.com/mishbahr
 .. _`@robinandeer`: https://github.com/robinandeer
@@ -118,3 +132,9 @@ Contributors
 .. _`@ramiroluz`: https://github.com/ramiroluz
 .. _`@thedrow`: https://github.com/thedrow
 .. _`@lord63`: https://github.com/lord63
+.. _`@Matthias84`: https://github.com/Matthias84
+.. _`@lgp171188`: https://github.com/lgp171188
+.. _`@charlax`: https://github.com/charlax
+.. _`@drgarcia1986`: https://github.com/drgarcia1986
+.. _`@agconti`: https://github.com/agconti
+.. _`@vaab`: https://github.com/vaab
