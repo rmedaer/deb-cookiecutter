@@ -1,3 +1,11 @@
+cookiecutter (1.1.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+     + Drop all current patches.
+     + Complete build-dependencies (future, whichcraft).
+
+ -- Vincent Bernat <bernat@debian.org>  Fri, 09 Oct 2015 19:39:40 +0200
+
 cookiecutter (1.0.0-3) unstable; urgency=medium
 
   * Update click patch to accept any version.
