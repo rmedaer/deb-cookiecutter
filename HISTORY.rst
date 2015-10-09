@@ -3,14 +3,99 @@
 History
 -------
 
-1.0.0 (2015-01-13) Chocolate Chip
+1.1.0 (2015-09-26)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The goals of this release is to add extra content via the command-line and `copy without render`_.
+
+Features:
+
+* Added `copy without render`_ feature, making it much easier for developers of Ansible, Salt Stack, and other recipe-based tools to work with Cookiecutter. Thanks to `@osantana`_ and `@LucianU`_ for their innovation, as well as `@hackebrot`_ for fixing the Windows problems (#132, #184, #425).
+* Added `specify output directory`, thanks to `tony` and `@hackebrot`_ (#531, #452),
+* Abort template rendering if the project output directory already exists, thanks to `@lgp171188`_ (#470, #471).
+* Add a flag to overwrite existing output directory, thanks to `@lgp171188`_ for the implementation (#495) and `@schacki`_, `@ionelmc`_, `@pydanny`_ and `@hackebrot`_ for submitting issues and code reviews (#475, #493).
+* Remove test command in favor of tox, thanks to `@hackebrot`_ (#480).
+* Allow cookiecutter invocation, even without installing it, via ``python -m cookiecutter.cli``, thanks to  `@vincentbernat`_ and `@hackebrot`_ (#449, #487).
+* Improve the type detection handler for online and offline repositories, thanks to `@charlax`_ (#490).
+* Add replay feature, thanks to `@hackebrot`_ (#501).
+* Be more precise when raising an error for an invalid user config file, thanks to `@vaab`_ and `@hackebrot`_ (#378, #528).
+* Added official Python 3.5 support, thanks to `@pydanny`_ and `@hackebrot`_ (#522).
+
+Other Changes:
+
+* Updated click requirement to < 6.0, thanks to `@pydanny`_ (#473).
+* Added landscape.io flair, thanks to `@michaeljoseph`_ (#439).
+* Descriptions of PEP8 specifications and milestone management, thanks to `@michaeljoseph`_ (#440).
+* Added alternate installation options in the documentation, thanks to `@pydanny`_  (#117, #315).
+* The test of the `which()` function now tests against the `date` command, thanks to `@vincentbernat`_ (#446)
+* Ensure file handles in setup.py are closed using with statement, thanks to `@svisser`_ (#280).
+* Removed deprecated and fully extraneous `compat.is_exe()` function, thanks to `@hackebrot`_ (#485).
+* Disabled sudo in .travis, thanks to `@hackebrot`_ (#482).
+* Switched to shields.io for problematic badges, thanks to `@pydanny`_ (#491).
+* Added whichcraft and removed ``compat.which()``, thanks to `@pydanny`_ (#511).
+* Changed to export tox environment variables to codecov, thanks to `@maiksensi`_. (#508).
+* Moved to using click version command, thanks to `@hackebrot`_ (#489).
+* Don't use unicode_literals to please click, thanks to `@vincentbernat`_ (#503).
+* Remove warning for Python 2.6 from __init__.py, thanks to `@hackebrot`_.
+* Removed `compat.py` module, thanks to `@hackebrot`_.
+* Added `future` to requirements, thanks to `@hackebrot`_.
+* Fixed problem where expanduser does not resolve "~" correctly on windows 10 using tox, thanks to `@maiksensi`_. (#527)
+* Added more cookiecutter templates to the mix:
+
+  * `cookiecutter-beamer`_ by `@luismartingil`_ (#307)
+  * `cookiecutter-pytest-plugin`_ by `@pytest-dev`_ and `@hackebrot`_ (#481)
+  * `cookiecutter-csharp-objc-binding`_ by `@SandyChapman`_ (#460)
+  * `cookiecutter-flask-foundation`_ by `@JackStouffer`_ (#457)
+  * `cookiecutter-tryton`_ by `@fulfilio`_ (#465)
+  * `cookiecutter-tapioca`_ by `@vintasoftware`_ (#496)
+  * `cookiecutter-sublime-text-3-plugin`_ by `@kkujawinski`_ (#500)
+  * `cookiecutter-muffin`_ by `@drgarcia1986`_ (#494)
+  * `cookiecutter-django-rest`_ by `@agconti`_ (#520)
+  * `cookiecutter-es6-boilerplate`_ by `@agconti`_ (#521)
+  * `cookiecutter-tampermonkey`_ by `@christabor`_ (#516)
+  * `cookiecutter-wagtail`_ by `@torchbox`_ (#533)
+
+.. _`@maiksensi`: https://github.com/maiksensi
+.. _`copy without render`: http://cookiecutter.readthedocs.org/en/latest/advanced_usage.html#copy-without-render
+.. _`@osantana`: https://github.com/osantana
+.. _`@LucianU`: https://github.com/LucianU
+.. _`@svisser`: https://github.com/svisser
+.. _`@lgp171188`: https://github.com/lgp171188
+.. _`@SandyChapman`: https://github.com/SandyChapman
+.. _`@JackStouffer`: https://github.com/JackStouffer
+.. _`@fulfilio`: https://github.com/fulfilio
+.. _`@vintasoftware`: https://github.com/vintasoftware
+.. _`@kkujawinski`: https://github.com/kkujawinski
+.. _`@charlax`: https://github.com/charlax
+.. _`@drgarcia1986`: https://github.com/drgarcia1986
+.. _`@agconti`: https://github.com/agconti
+.. _`@vaab`: https://github.com/vaab
+.. _`@christabor`: https://github.com/christabor
+.. _`@torchbox`: https://github.com/torchbox
+
+.. _`cookiecutter-beamer`: https://github.com/luismartingil/cookiecutter-beamer
+.. _`@luismartingil`: https://github.com/luismartingil
+.. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
+.. _`@pytest-dev`: https://github.com/pytest-dev
+.. _`cookiecutter-csharp-objc-binding`: https://github.com/SandyChapman/cookiecutter-csharp-objc-binding
+.. _`cookiecutter-flask-foundation`: https://github.com/JackStouffer/cookiecutter-Flask-Foundation
+.. _`cookiecutter-tryton`: https://github.com/fulfilio/cookiecutter-tryton
+.. _`cookiecutter-tapioca`: https://github.com/vintasoftware/cookiecutter-tapioca
+.. _`cookiecutter-sublime-text-3-plugin`: https://github.com/kkujawinski/cookiecutter-sublime-text-3-plugin
+.. _`cookiecutter-muffin`: https://github.com/drgarcia1986/cookiecutter-muffin
+.. _`cookiecutter-django-rest`: https://github.com/agconti/cookiecutter-django-rest
+.. _`cookiecutter-es6-boilerplate`: https://github.com/agconti/cookiecutter-es6-boilerplate
+.. _`cookiecutter-tampermonkey`: https://github.com/christabor/cookiecutter-tampermonkey
+.. _`cookiecutter-wagtail`: https://github.com/torchbox/cookiecutter-wagtail
+
+1.0.0 (2015-03-13) Chocolate Chip
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The goals of this release was to formally remove support for Python 2.6 and continue the move to using py.test.
 
 Features:
 
-* Lay the foundation for `py.test` fixtures and convert `test_generate.py` and `test_examples.py`, thanks to `@hackebrot`_ (#322, #332, #334, #336, #337, #338, #340, #341, #343, #345, #347, #351, #412, #413, #414).
+* Convert the unittest suite to py.test for the sake of comprehensibility, thanks to `@hackebrot`_ (#322, #332, #334, #336, #337, #338, #340, #341, #343, #345, #347, #351, #412, #413, #414).
 * Generate pytest coverage, thanks to `@michaeljoseph`_ (#326).
 * Documenting of Pull Request merging and HISTORY.rst maintenance, thanks to `@michaeljoseph`_ (#330).
 * Large expansions to the tutorials thanks to `@hackebrot`_ (#384)
@@ -26,9 +111,6 @@ Other Changes:
 * Updated to Jinja 2.7 or higher in order to control trailing new lines in templates, thanks to `@sfermigier`_ (#356).
 * Tweaked flake8 to ignore e731, thanks to `@michaeljoseph`_ (#390).
 * Fixed failing Windows tests and corrected AppVeyor badge link thanks to `@msabramo`_ (#403).
-
-.. _`@msabramo`: https://github.com/msabramo
-
 * Added more Cookiecutters to the list:
 
   * `cookiecutter-scala-spark`_ by `@jpzk`_
@@ -38,6 +120,7 @@ Other Changes:
   * `cookiecutter-django-rest-framework`_ by `@jpadilla`_
   * `cookiedozer`_ by `@hackebrot`_
 
+.. _`@msabramo`: https://github.com/msabramo
 .. _`@marctc`: https://github.com/marctc
 .. _`cookiedozer`: https://github.com/hackebrot/cookiedozer
 .. _`@jpadilla`: https://github.com/jpadilla
@@ -274,7 +357,7 @@ New features:
 Bug fixes:
 
 * Unicode issues with prompts and answers are fixed, thanks to `@s-m-i-t-a`_.
-* The test suite now runs on Windows, which was a major effort. Thanks to 
+* The test suite now runs on Windows, which was a major effort. Thanks to
   `@pydanny`_, who collaborated on this with me.
 
 Other changes:
@@ -402,4 +485,3 @@ Roadmap
 -------
 
 https://github.com/audreyr/cookiecutter/milestones?direction=desc&sort=due_date&state=open
-

@@ -1,5 +1,6 @@
 # Config file for automatic testing at travis-ci.org
 
+sudo: false
 language: python
 python: 2.7
 env:
@@ -16,5 +17,6 @@ install:
 
 after_success:
     # Report coverage results to codecov.io
+    # and export tox environment variables
     - pip install codecov
-    - codecov
+    - codecov -e TOX_ENV

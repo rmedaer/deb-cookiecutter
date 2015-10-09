@@ -4,11 +4,11 @@ import os
 import sys
 
 try:
-    from setuptools import setup, Command
+    from setuptools import setup
 except ImportError:
-    from distutils.core import setup, Command
+    from distutils.core import setup
 
-version = "1.0.0"
+version = "1.1.0"
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
@@ -20,23 +20,20 @@ if sys.argv[-1] == 'tag':
     os.system("git push --tags")
     sys.exit()
 
-readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
 
-requirements = ['binaryornot>=0.2.0', 'jinja2>=2.7', 'PyYAML>=3.10', 'click<4.0']
-test_requirements = ['pytest']
+with open('HISTORY.rst') as history_file:
+    history = history_file.read().replace('.. :changelog:', '')
 
-# Add Python 2.6-specific dependencies
-if sys.version_info[:2] < (2, 7):
-    requirements.append('ordereddict')
-    requirements.append('simplejson')
-    test_requirements.append('unittest2')
-
-# Add Python 2.6 and 2.7-specific dependencies
-if sys.version < '3':
-    requirements.append('mock')
-
-# There are no Python 3-specific dependencies to add
+requirements = [
+    'future>=0.15.2',
+    'binaryornot>=0.2.0',
+    'jinja2>=2.7',
+    'PyYAML>=3.10',
+    'click>=5.0',
+    'whichcraft>=0.1.1'
+]
 
 long_description = readme + '\n\n' + history
 
@@ -44,27 +41,13 @@ if sys.argv[-1] == 'readme':
     print(long_description)
     sys.exit()
 
-class PyTest(Command):
-    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
-
-    def initialize_options(self):
-        self.pytest_args = []
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        import pytest
-        errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
-
 
 setup(
     name='cookiecutter',
     version=version,
     description=('A command-line utility that creates projects from project '
-                 'templates, e.g. creating a Python package project from a Python '
-                 'package project template.'),
+                 'templates, e.g. creating a Python package project from a '
+                 'Python package project template.'),
     long_description=long_description,
     author='Audrey Roy',
     author_email='audreyr@gmail.com',
@@ -94,13 +77,14 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development',
     ],
-    keywords='cookiecutter, Python, projects, project templates, Jinja2, \
-        skeleton, scaffolding, project directory, setup.py, package, packaging',
-    cmdclass = {'test': PyTest},
-    test_suite='tests',
-    tests_require=test_requirements
+    keywords=(
+        'cookiecutter, Python, projects, project templates, Jinja2, '
+        'skeleton, scaffolding, project directory, setup.py, package, '
+        'packaging'
+    ),
 )

@@ -105,9 +105,14 @@ Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass the tests and flake8::
 
-    $ flake8 cookiecutter tests
-    $ python setup.py test
+    $ pip install tox
     $ tox
+
+Please note that tox runs flake8 automatically, since we have a test environment for it.
+
+If you feel like running only the flake8 environment, please use the following command::
+
+    $ tox -e flake8
 
 6. Commit your changes and push your branch to GitHub::
 
@@ -117,11 +122,10 @@ Now you can make your changes locally.
 
 7. Check that the test coverage hasn't dropped::
 
-    coverage run --source cookiecutter setup.py test
-    coverage report -m
-    coverage html
+    $ tox -e cov-report
 
-8. Submit a pull request through the GitHub website.
+8. Submit a pull request through the GitHub website.
+
 Contributor Guidelines
 -----------------------
 
@@ -134,7 +138,7 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 2.6, 2.7, 3.3, and PyPy on Appveyor and Travis CI.
+3. The pull request should work for Python 2.7, 3.3, 3.4, 3.5, and PyPy on Appveyor and Travis CI.
 4. Check https://travis-ci.org/audreyr/cookiecutter/pull_requests and 
    https://ci.appveyor.com/project/audreyr/cookiecutter/history to ensure the tests pass for all supported Python versions and platforms.
 
@@ -143,35 +147,50 @@ Coding Standards
 
 * PEP8
 * Functions over classes except in tests
-* Prefer single quotes (unless inconvenient) http://stackoverflow.com/a/56190/5549
+* Quotes via http://stackoverflow.com/a/56190/5549
+
+  * Use double quotes around strings that are used for interpolation or that are natural language messages
+  * Use single quotes for small symbol-like strings (but break the rules if the strings contain quotes)
+  * Use triple double quotes for docstrings and raw string literals for regular expressions even if they aren't needed.
+  * Example:
+
+    .. code-block:: python
+
+        LIGHT_MESSAGES = {
+            'English': "There are %(number_of_lights)s lights.",
+            'Pirate':  "Arr! Thar be %(number_of_lights)s lights."
+        }
+
+        def lights_message(language, number_of_lights):
+            """Return a language-appropriate string reporting the light count."""
+            return LIGHT_MESSAGES[language] % locals()
+
+        def is_pirate(message):
+            """Return True if the given message sounds piratical."""
+            return re.search(r"(?i)(arr|avast|yohoho)!", message) is not None
+
+  * Write new code in Python 3.
 
-Testing
--------
+Testing with tox
+----------------
 
-To run a particular test::
+Tox uses py.test under the hood, hence it supports the same syntax for selecting tests.
 
-    $ python -m unittest tests.test_find.TestFind.test_find_template
+For further information please consult the `pytest usage docs`_.
 
-To run a subset of tests::
+To run a particular test class with tox::
 
-    $ python -m unittest tests.test_find
-
-Testing with py.test
---------------------
-
-To run a particular test class with py.test::
-
-    $ py.test -k TestGetConfig
+    $ tox -e py '-k TestFindHooks'
 
 To run some tests with names matching a string expression::
 
-    $ py.test -k generate
+    $ tox -e py '-k generate'
 
 Will run all tests matching "generate", test_generate_files for example.
 
 To run just one method::
 
-    $ py.test -k TestGetConfig::test_get_config
+    $ tox -e py '-k "TestFindHooks and test_find_hook"'
 
 
 To run all tests using various versions of python in virtualenvs defined in tox.ini, just run tox.::
@@ -198,6 +217,7 @@ Python 3.3 tests fail locally
 Try upgrading Tox to the latest version. I noticed that they were failing
 locally with Tox 1.5 but succeeding when I upgraded to Tox 1.7.1.
 
+.. _`pytest usage docs`: https://pytest.org/latest/usage.html#specifying-tests-selecting-tests
 
 Core Committer Guide
 ====================
@@ -327,6 +347,43 @@ Milestone size:
 
 * If a milestone contains too much, move some to the next milestone.
 * Err on the side of more frequent patch releases.
+
+Process: Pull Request merging and HISTORY.rst maintenance
+---------------------------------------------------------
+
+If you merge a pull request, you're responsible for updating `AUTHORS.rst` and `HISTORY.rst`
+
+When you're processing the first change after a release, create boilerplate following the existing pattern:
+
+    x.y.z (Development)
+    ~~~~~~~~~~~~~~~~~~~
+
+    The goals of this release are TODO: release summary of features
+
+    Features:
+
+    * Feature description, thanks to @contributor (#PR).
+
+    Bug Fixes:
+
+    * Bug fix description, thanks to @contributor (#PR).
+
+    Other changes:
+
+    * Description of the change, thanks to @contributor (#PR). 
+                      
+    .. _`@contributor`: https://github.com/contributor
+
+Process: Accepting Template Pull Requests
+-----------------------------------------
+
+#. Run the template to generate the project.
+#. Attempt to start/use the rendered project.
+#. Merge the template in.
+#. Update the history file.
+
+.. note:: Adding a template doesn't give authors credit.
+
 
 Process: Generating CONTRIBUTING.rst
 -------------------------------------

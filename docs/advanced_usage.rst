@@ -47,6 +47,7 @@ If you use Cookiecutter a lot, you'll find it useful to have a
         email: "audreyr@gmail.com"
         github_username: "audreyr"
     cookiecutters_dir: "/home/audreyr/my-custom-cookiecutters-dir/"
+    replay_dir: "/home/audreyr/my-custom-replay-dir/"
     abbreviations:
         pp: https://github.com/audreyr/cookiecutter-pypackage.git
         gh: https://github.com/{0}.git
@@ -59,6 +60,8 @@ Possible settings are:
   like the defaults in `cookiecutter.json`, upon generation of any project.
 * cookiecutters_dir: Directory where your cookiecutters are cloned to when you
   use Cookiecutter with a repo argument.
+* replay_dir: Directory where Cookiecutter dumps context data to, which
+  you can fetch later on when using the `replay feature`_.
 * abbreviations: A list of abbreviations for cookiecutters. Abbreviations can
   be simple aliases for a repo name, or can be used as a prefix, in the form
   `abbr:suffix`. Any suffix will be inserted into the expansion in place of
@@ -176,6 +179,64 @@ Or, if the user gives `Yet Another New Project`, the values will be:
 * `yet-another-new-project`
 * `yetanothernewproject`
 
+Copy without Render
+-------------------
+
+*New in Cookiecutter 1.1*
+
+To avoid rendering directories and files of a cookiecutter mould, the `_copy_without_render` key can be used in the `cookiecutter.json`. The value of this key accepts a list of Unix shell-style wildcards::
+
+    {
+        "repo_name": "sample",
+        "_copy_without_render": [
+            "*.html",
+            "*not_rendered_dir",
+            "rendered_dir/not_rendered_file.ini"
+        ]
+    }
+
+.. _`replay feature`:
+
+Replay Project Generation
+-------------------------
+
+*New in Cookiecutter 1.1*
+
+On invocation **Cookiecutter** dumps a json file to ``~/.cookiecutter_replay/`` which enables you to *replay* later on.
+
+In other words, it persists your **input** for a template and fetches it when you run the same template again.
+
+Example for a replay file (which was created via ``cookiecutter gh:hackebrot/cookiedozer``)::
+
+    {
+        "cookiecutter": {
+            "app_class_name": "FooBarApp",
+            "app_title": "Foo Bar",
+            "email": "raphael@hackebrot.de",
+            "full_name": "Raphael Pierzina",
+            "github_username": "hackebrot",
+            "kivy_version": "1.8.0",
+            "repo_name": "foobar",
+            "short_description": "A sleek slideshow app that supports swipe gestures.",
+            "version": "0.1.0",
+            "year": "2015"
+        }
+    }
+
+To fetch this context data without being prompted on the command line you can use either of the following methods.
+
+Pass the according option on the CLI::
+
+    cookiecutter --replay gh:hackebrot/cookiedozer
+
+
+Or use the Python API::
+
+    from cookiecutter.main import cookiecutter
+    cookiecutter('gh:hackebrot/cookiedozer', replay=True)
+
+
+This feature is comes in handy if, for instance, you want to create a new project from an updated template.
 
 .. _command_line_options:
 

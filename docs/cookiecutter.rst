@@ -68,18 +68,18 @@ cookiecutter.main module
     :undoc-members:
     :show-inheritance:
 
-cookiecutter.plugins module
----------------------------
-
-.. automodule:: cookiecutter.plugins
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 cookiecutter.prompt module
 --------------------------
 
 .. automodule:: cookiecutter.prompt
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+cookiecutter.replay module
+--------------------------
+
+.. automodule:: cookiecutter.replay
     :members:
     :undoc-members:
     :show-inheritance:
