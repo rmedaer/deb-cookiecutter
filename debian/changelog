@@ -4,6 +4,7 @@ cookiecutter (1.1.0-1) UNRELEASED; urgency=medium
      + Drop all current patches.
      + Complete build-dependencies (future, whichcraft).
   * d/rules: use PYBUILD_NAME.
+  * d/rules: enforce use of py.test for tests.
 
  -- Vincent Bernat <bernat@debian.org>  Fri, 09 Oct 2015 19:39:40 +0200
 
