@@ -2,10 +2,10 @@
 6e9a2488e6c8820c824d07af71ef76cb151e6ea6
 6e9a2488e6c8820c824d07af71ef76cb151e6ea6
 e0b45044355244a6cee70afa49fca8d63ff44dca
-e0b45044355244a6cee70afa49fca8d63ff44dca
-cookiecutter_1.0.0.orig.tar.gz
-0edab6e67655a41f85c79e8424df466b76e3e9cc
-114813
+e54282d9b5cb0425475785de006a787e953b6e92
+cookiecutter_1.1.0.orig.tar.gz
+243f48383335c36ffdf3ee074c8ca698e7b48035
+213420
 debianTag="debian/%e%v"
 patchedTag="patched/%e%v"
 upstreamTag="upstream/%e%u"
