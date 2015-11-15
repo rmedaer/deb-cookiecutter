@@ -112,11 +112,9 @@ def test_generate_files_binaries():
     )
 
     assert os.path.isfile('inputbinary_files/logo.png')
-    assert os.path.isfile('inputbinary_files/.DS_Store')
     assert os.path.isfile('inputbinary_files/readme.txt')
     assert os.path.isfile('inputbinary_files/some_font.otf')
     assert os.path.isfile('inputbinary_files/binary_files/logo.png')
-    assert os.path.isfile('inputbinary_files/binary_files/.DS_Store')
     assert os.path.isfile('inputbinary_files/binary_files/readme.txt')
     assert os.path.isfile('inputbinary_files/binary_files/some_font.otf')
     assert os.path.isfile(
