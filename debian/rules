@@ -18,6 +18,10 @@ override_dh_auto_clean:
 	dh_auto_clean
 	find . \( -name '*.py[co]' -or -name '\._*' -or -name '\.DS_Store' \) -delete
 
+override_dh_auto_test:
+	mkdir -p $(PWD)/.fake-home
+	HOME=$(PWD)/.fake-home dh_auto_test || (rm -rf $(PWD)/.fake-home ; exit 1)
+
 override_dh_install:
 	dh_install
 	# Move cookiecutter executable in its dedicated package
