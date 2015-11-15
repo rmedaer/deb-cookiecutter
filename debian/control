@@ -13,6 +13,7 @@ Build-Depends: debhelper (>= 7.0.50~), dh-python,
                python-binaryornot, python3-binaryornot,
                python-yaml, python3-yaml,
                python-pytest, python3-pytest,
+               python-pytest-mock, python3-pytest-mock,
                python-click, python3-click,
                python-future, python3-future,
                python-whichcraft, python3-whichcraft
