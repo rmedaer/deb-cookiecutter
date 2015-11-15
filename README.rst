@@ -3,7 +3,7 @@ Cookiecutter
 =============
 
 .. image:: https://img.shields.io/pypi/v/cookiecutter.svg
-        :target: https://pypi.python.org/pypi/cookiecutter/1.0.0
+        :target: https://pypi.python.org/pypi/cookiecutter
 
 .. image:: https://travis-ci.org/audreyr/cookiecutter.png?branch=master
         :target: https://travis-ci.org/audreyr/cookiecutter
@@ -12,7 +12,7 @@ Cookiecutter
         :target: https://ci.appveyor.com/project/audreyr/cookiecutter/branch/master
 
 .. image:: https://img.shields.io/pypi/dm/cookiecutter.svg
-        :target: https://pypi.python.org/pypi/cookiecutter/1.0.0
+        :target: https://pypi.python.org/pypi/cookiecutter
 
 .. image:: https://codecov.io/github/audreyr/cookiecutter/coverage.svg?branch=master
         :target: https://codecov.io/github/audreyr/cookiecutter?branch=master
@@ -163,7 +163,6 @@ Python
 * `cookiecutter-pypackage-minimal`_: A mimimal Python package template.
 * `cookiecutter-ansible-role`_: A template to create ansible roles. Forget about file creation and focus on actions.
 * `cookiecutter-pylibrary`_: An intricate template designed to quickly get started with good testing and packaging (working configuration for Tox, Pytest, Travis-CI, Coveralls, AppVeyor, Sphinx docs, isort, bumpversion, packaging checks etc).
-* `cookiecutter-pylibrary-minimal`_: Same as above but without Pytest and static configuration for Tox/Travis/AppVeyor (no generator).
 * `cookiecutter-pyvanguard`_: A template for cutting edge Python development. `Invoke`_, pytest, bumpversion, and Python 2/3 compatability.
 * `Python-iOS-template`_: A template to create a Python project that will run on iOS devices.
 * `Python-Android-template`_: A template to create a Python project that will run on Android devices.
@@ -176,9 +175,9 @@ Python
 Python-Django
 ^^^^^^^^^^^^^
 
+* `cookiecutter-django`_: A bleeding edge Django project template with Bootstrap 4, customizable users app, starter templates,  working user registration, celery setup, and much more.
 * `cookiecutter-django-rest`_: For creating REST apis for mobile and web applications.
 * `cookiecutter-simple-django`_: A cookiecutter template for creating reusable Django projects quickly.
-* `cookiecutter-django`_: A bleeding edge Django project template with Bootstrap 3, customizable users app, starter templates, and working user registration.
 * `cookiecutter-djangopackage`_: A template designed to create reusable third-party PyPI friendly Django apps. Documentation is written in tutorial format.
 * `cookiecutter-django-cms`_: A template for Django CMS with simple Bootstrap 3 template. It has a quick start and deploy documentation.
 * `cookiecutter-djangocms-plugin`_: A template to get started with custom plugins for django-cms
@@ -280,7 +279,6 @@ HTML
 .. _`cookiecutter-avr`: https://github.com/solarnz/cookiecutter-avr
 .. _`cookiecutter-tumblr-theme`: https://github.com/relekang/cookiecutter-tumblr-theme
 .. _`cookiecutter-pylibrary`: https://github.com/ionelmc/cookiecutter-pylibrary
-.. _`cookiecutter-pylibrary-minimal`: https://github.com/ionelmc/cookiecutter-pylibrary-minimal
 .. _`cookiecutter-pyvanguard`: https://github.com/robinandeer/cookiecutter-pyvanguard
 .. _`Python-iOS-template`: https://github.com/pybee/Python-iOS-template
 .. _`Python-Android-template`: https://github.com/pybee/Python-Android-template
@@ -371,7 +369,7 @@ Stuck? Try one of the following:
 * You are strongly encouraged to `file an issue`_ about the problem, even if
   it's just "I can't get it to work on this cookiecutter" with a link to your
   cookiecutter. Don't worry about naming/pinpointing the issue properly.
-* Ask for help in #cookiecutter if you must (but please try one of the other
+* Ask for help on `Gitter`_ if you must (but please try one of the other
   options first, so that others can benefit from the discussion)
 
 Development on Cookiecutter is community-driven:
@@ -381,9 +379,9 @@ Development on Cookiecutter is community-driven:
 * Everyone is invited to contribute. Read the `contributing instructions`_,
   then get started.
 
-Connect with other Cookiecutter contributors and users in IRC:
+Connect with other Cookiecutter contributors and users on `Gitter`_:
 
-* #cookiecutter on irc.freenode.net (note: due to work and commitments,
+* https://gitter.im/audreyr/cookiecutter (note: due to work and commitments,
   a core committer might not always be available)
 
 Encouragement is unbelievably motivating. If you want more work done on
@@ -435,3 +433,4 @@ rooms, and mailing lists is expected to follow the `PyPA Code of Conduct`_.
 .. _`@michaeljoseph`: https://github.com/michaeljoseph
 .. _`@pfmoore`: https://github.com/pfmoore
 .. _`@hackebrot`: https://github.com/hackebrot
+.. _`Gitter`: https://gitter.im/audreyr/cookiecutter

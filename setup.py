@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import platform
 import sys
 
 try:
@@ -8,7 +9,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = "1.1.0"
+version = "1.2.1"
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
@@ -30,10 +31,17 @@ requirements = [
     'future>=0.15.2',
     'binaryornot>=0.2.0',
     'jinja2>=2.7',
-    'PyYAML>=3.10',
     'click>=5.0',
     'whichcraft>=0.1.1'
 ]
+
+# Use PyYAML for 2.7 on Windows, ruamel.yaml everywhere else
+PY2 = sys.version_info[0] == 2
+windows = platform.system().lower().startswith('windows')
+if PY2 and windows:
+    requirements.append('PyYAML>=3.10')
+else:
+    requirements.append('ruamel.yaml>=0.10.12')
 
 long_description = readme + '\n\n' + history
 
@@ -66,7 +74,7 @@ setup(
     license='BSD',
     zip_safe=False,
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Natural Language :: English',
