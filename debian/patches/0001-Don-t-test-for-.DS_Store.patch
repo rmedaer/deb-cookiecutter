@@ -1,0 +1,22 @@
+From 8038fb88030e9529b5ca5176ac220c6a5f9000b3 Mon Sep 17 00:00:00 2001
+From: Vincent Bernat <vincent@bernat.im>
+Date: Mon, 16 Nov 2015 00:02:17 +0100
+Subject: Don't test for ".DS_Store"
+
+This file is excluded during extraction by dpkg-source.
+---
+ tests/test_generate_files.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/tests/test_generate_files.py b/tests/test_generate_files.py
+index f75b0db440ce..7ee2e3f346e7 100644
+--- a/tests/test_generate_files.py
++++ b/tests/test_generate_files.py
+@@ -113,7 +113,6 @@ def test_generate_files_binaries():
+     )
+ 
+     assert os.path.isfile('inputbinary_files/logo.png')
+-    assert os.path.isfile('inputbinary_files/.DS_Store')
+     assert os.path.isfile('inputbinary_files/readme.txt')
+     assert os.path.isfile('inputbinary_files/some_font.otf')
+     assert os.path.isfile('inputbinary_files/binary_files/logo.png')
