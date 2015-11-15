@@ -1,11 +1,11 @@
 # see git-dpm(1) from git-dpm package
-e54282d9b5cb0425475785de006a787e953b6e92
-e54282d9b5cb0425475785de006a787e953b6e92
-e54282d9b5cb0425475785de006a787e953b6e92
-e54282d9b5cb0425475785de006a787e953b6e92
-cookiecutter_1.1.0.orig.tar.gz
-243f48383335c36ffdf3ee074c8ca698e7b48035
-213420
+db64feff584643eec95fb180dd7e84f2a7c4ba8a
+db64feff584643eec95fb180dd7e84f2a7c4ba8a
+db64feff584643eec95fb180dd7e84f2a7c4ba8a
+db64feff584643eec95fb180dd7e84f2a7c4ba8a
+cookiecutter_1.2.1.orig.tar.gz
+82e1dacab7adc0b6453b3c81c0c9acc5eaf4114e
+215412
 debianTag="debian/%e%v"
 patchedTag="patched/%e%v"
 upstreamTag="upstream/%e%u"

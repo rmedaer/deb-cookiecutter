@@ -3,15 +3,43 @@
 History
 -------
 
-1.1.0 (2015-09-26)
-~~~~~~~~~~~~~~~~~~~~~~~~
+1.2.1 (2015-10-18) Zimtsterne
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The goals of this release is to add extra content via the command-line and `copy without render`_.
+*Zimtsterne are cinnamon star cookies*
+
+New Feature:
+
+* Returns rendered project dir, thanks to `@hackebrot`_ (#553)
+
+Bug Fixes:
+
+* Factor in *choice* variables (as introduced in 1.1.0) when using a user config or extra context, thanks to `@ionelmc`_ and `@hackebrot`_ (#536, #542).
+
+Other Changes:
+
+* Enable py35 support on Travis by using Python 3.5 as base Python (`@maiksensi`_ / #540)
+* If a filename is empty, do not generate. Log instead (`@iljabauer`_ / #444)
+* Fix tests as per last changes in `cookiecutter-pypackage`_, thanks to `@eliasdorneles`_ (#555).
+* Removed deprecated cookiecutter-pylibrary-minimal from the list, thanks to `@ionelmc`_ (#556)
+* Moved to using `rualmel.yaml` instead of `PyYAML`, except for Windows users on Python 2.7, thanks to `@pydanny`_ (#557)
+
+.. _`cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+.. _`@iljabauer`: https://github.com/iljabauer
+.. _`@eliasdorneles`: https://github.com/eliasdorneles
+
+*Why 1.2.1 instead of 1.2.0? There was a problem in the distribution that we pushed to PyPI. Since you can't replace previous files uploaded to PyPI, we deleted the files on PyPI and released 1.2.1.*
+
+
+1.1.0 (2015-09-26) Snickerdoodle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The goals of this release were `copy without render` and a few additional command-line options such as `--overwrite-if-exists`, `—replay`, and `output-dir`.
 
 Features:
 
 * Added `copy without render`_ feature, making it much easier for developers of Ansible, Salt Stack, and other recipe-based tools to work with Cookiecutter. Thanks to `@osantana`_ and `@LucianU`_ for their innovation, as well as `@hackebrot`_ for fixing the Windows problems (#132, #184, #425).
-* Added `specify output directory`, thanks to `tony` and `@hackebrot`_ (#531, #452),
+* Added `specify output directory`, thanks to `@tony`_ and `@hackebrot`_ (#531, #452).
 * Abort template rendering if the project output directory already exists, thanks to `@lgp171188`_ (#470, #471).
 * Add a flag to overwrite existing output directory, thanks to `@lgp171188`_ for the implementation (#495) and `@schacki`_, `@ionelmc`_, `@pydanny`_ and `@hackebrot`_ for submitting issues and code reviews (#475, #493).
 * Remove test command in favor of tox, thanks to `@hackebrot`_ (#480).
@@ -20,6 +48,7 @@ Features:
 * Add replay feature, thanks to `@hackebrot`_ (#501).
 * Be more precise when raising an error for an invalid user config file, thanks to `@vaab`_ and `@hackebrot`_ (#378, #528).
 * Added official Python 3.5 support, thanks to `@pydanny`_ and `@hackebrot`_ (#522).
+* Added support for *choice* variables and switch to click style prompts, thanks to `@hackebrot`_ (#441, #455).
 
 Other Changes:
 
@@ -72,6 +101,7 @@ Other Changes:
 .. _`@vaab`: https://github.com/vaab
 .. _`@christabor`: https://github.com/christabor
 .. _`@torchbox`: https://github.com/torchbox
+.. _`@tony`: https://github.com/tony
 
 .. _`cookiecutter-beamer`: https://github.com/luismartingil/cookiecutter-beamer
 .. _`@luismartingil`: https://github.com/luismartingil
