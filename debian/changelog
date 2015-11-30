@@ -1,12 +1,13 @@
-cookiecutter (1.2.1-1) UNRELEASED; urgency=medium
+cookiecutter (1.2.1-1) unstable; urgency=medium
 
   * New upstream release.
      + Drop all current patches.
-     + Complete build-dependencies (future, whichcraft, pytest-mock, ruamel.yaml).
+     + Complete build-dependencies (future, whichcraft, pytest-mock,
+       ruamel.yaml).
   * d/rules: use PYBUILD_NAME.
   * d/rules: enforce use of py.test for tests.
 
- -- Vincent Bernat <bernat@debian.org>  Sun, 15 Nov 2015 23:08:19 +0100
+ -- Vincent Bernat <bernat@debian.org>  Mon, 30 Nov 2015 09:10:51 +0100
 
 cookiecutter (1.0.0-3) unstable; urgency=medium
 
