@@ -2,7 +2,7 @@ cookiecutter (1.2.1-1) UNRELEASED; urgency=medium
 
   * New upstream release.
      + Drop all current patches.
-     + Complete build-dependencies (future, whichcraft, pytest-mock).
+     + Complete build-dependencies (future, whichcraft, pytest-mock, ruamel.yaml).
   * d/rules: use PYBUILD_NAME.
   * d/rules: enforce use of py.test for tests.
 
