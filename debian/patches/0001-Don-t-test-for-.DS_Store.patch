@@ -1,4 +1,4 @@
-From 37e46a0dfe41ba2f506e7ff330cea44084eb6444 Mon Sep 17 00:00:00 2001
+From 21abd3c3c0b9865cd6e59c15dc45a4bf3eedf4ee Mon Sep 17 00:00:00 2001
 From: Vincent Bernat <vincent@bernat.im>
 Date: Mon, 16 Nov 2015 00:02:17 +0100
 Subject: Don't test for ".DS_Store"
