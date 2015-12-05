@@ -38,7 +38,7 @@ Description: create projects from project templates
 
 Package: python-cookiecutter
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}
+Depends: ${python:Depends}, ${misc:Depends}, python-ruamel.yaml (>= 0.10.12)
 Description: create projects from project templates (Python 2 module)
  Cookiecutter is command-line utility that creates projects from
  project templates, e.g. creating a Python package project from a
@@ -53,7 +53,7 @@ Description: create projects from project templates (Python 2 module)
 
 Package: python3-cookiecutter
 Architecture: all
-Depends: ${python3:Depends}, ${misc:Depends}
+Depends: ${python3:Depends}, ${misc:Depends}, python3-ruamel.yaml (>= 0.10.12)
 Description: create projects from project templates (Python 3 module)
  Cookiecutter is command-line utility that creates projects from
  project templates, e.g. creating a Python package project from a
