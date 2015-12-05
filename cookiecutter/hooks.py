@@ -18,12 +18,15 @@ import tempfile
 from jinja2 import Template
 
 from cookiecutter import utils
+from .exceptions import FailedHookException
+
 
 _HOOKS = [
     'pre_gen_project',
     'post_gen_project',
     # TODO: other hooks should be listed here
 ]
+EXIT_SUCCESS = 0
 
 
 def find_hooks():
@@ -67,7 +70,10 @@ def run_script(script_path, cwd='.'):
         shell=run_thru_shell,
         cwd=cwd
     )
-    proc.wait()
+    exit_status = proc.wait()
+    if exit_status != EXIT_SUCCESS:
+        raise FailedHookException(
+            "Hook script failed (exit status: %d)" % exit_status)
 
 
 def run_script_with_context(script_path, cwd, context):
@@ -84,10 +90,11 @@ def run_script_with_context(script_path, cwd, context):
 
     with tempfile.NamedTemporaryFile(
         delete=False,
-        mode='w',
+        mode='wb',
         suffix=extension
     ) as temp:
-        temp.write(Template(contents).render(**context))
+        output = Template(contents).render(**context)
+        temp.write(output.encode('utf-8'))
 
     run_script(temp.name, cwd)
 
@@ -104,4 +111,4 @@ def run_hook(hook_name, project_dir, context):
     if script is None:
         logging.debug('No hooks found')
         return
-    return run_script_with_context(script, project_dir, context)
+    run_script_with_context(script, project_dir, context)

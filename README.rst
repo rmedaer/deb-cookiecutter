@@ -171,6 +171,7 @@ Python
 * `cookiecutter-tapioca`_: A Template for building `tapioca-wrapper`_ based web API wrappers (clients).
 * `cookiecutter-sublime-text-3-plugin`_: Sublime Text 3 plugin template with custom settings, commands, key bindings and main menu.
 * `cookiecutter-muffin`_: A Muffin template with Bootstrap 3, starter templates, and working user registration.
+* `cookiecutter-octoprint-plugin`_: A template for building plugins for `OctoPrint`_.
 
 Python-Django
 ^^^^^^^^^^^^^
@@ -186,6 +187,7 @@ Python-Django
 * `cookiecutter-django-paas`_: Django template ready to use in SAAS platforms like Heroku, OpenShift, etc..
 * `cookiecutter-django-rest-framework`_: A template for creating reusable Django REST Framework packages.
 * `cookiecutter-wagtail`_ : A cookiecutter template for `Wagtail`_ CMS based sites.
+* `wagtail-cookiecutter-foundation`_: A complete template for Wagtail CMS projects featuring Zurb Foundation 5, ansible provisioning and deployment , front-end dependency management with bower, modular apps to get your site up and running including photo_gallery, RSS feed etc.
 
 C
 ~~
@@ -294,6 +296,9 @@ HTML
 .. _`cookiecutter-muffin`: https://github.com/drgarcia1986/cookiecutter-muffin
 .. _`cookiecutter-wagtail`: https://github.com/torchbox/cookiecutter-wagtail
 .. _`Wagtail`: https://github.com/torchbox/wagtail
+.. _`cookiecutter-octoprint-plugin`: https://github.com/OctoPrint/cookiecutter-octoprint-plugin
+.. _`OctoPrint`: https://github.com/foosel/OctoPrint
+.. _`wagtail-cookiecutter-foundation`: https://github.com/chrisdev/wagtail-cookiecutter-foundation
 
 Scala
 ~~~~~
@@ -412,6 +417,17 @@ Waiting for a response to an issue/question?
 * Search the Cookiecutter repo for issues related to yours.
 * Need a fix/feature/release/help urgently, and can't wait? `@audreyr`_ is
   available for hire for consultation or custom development.
+
+Support This Project
+--------------------
+
+This project is maintained by volunteers. Support their efforts by spreading the word about:
+
+.. image:: https://s3.amazonaws.com/tsacademy/images/tsa-logo-250x60-transparent-01.png
+   :name: Two Scoops Academy
+   :align: center
+   :alt: Two Scoops Academy
+   :target: http://www.twoscoops.academy/
 
 Code of Conduct
 ---------------

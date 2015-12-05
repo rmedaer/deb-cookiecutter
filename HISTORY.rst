@@ -3,6 +3,47 @@
 History
 -------
 
+1.3.0 (2015-11-10) Pumpkin Spice
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The goal of this release is to extend the user config feature and to make hook execution more robust.
+
+New Features:
+
+* Abort project generation if ``pre_gen_project`` or ``post_gen_project`` hook scripts fail, thanks to `@eliasdorneles`_ (#464, #549)
+* Extend user config capabilities with additional cli options ``--config-file``
+  and ``--default-config`` and environment variable ``COOKIECUTTER_CONFIG``, thanks to `@jhermann`_, `@pfmoore`_, and `@hackebrot`_ (#258, #424, #565)
+
+Bug Fixes:
+
+* Fixed conditional dependencies for wheels in setup.py, thanks to `@hackebrot`_ (#557, #568)
+* Reverted skipif markers to use correct reasons (bug fixed in pytest), thanks to `@hackebrot`_ (#574)
+
+
+Other Changes:
+
+* Improved path and documentation for rendering the Sphinx documentation, thanks to `@eliasdorneles`_ and `@hackebrot`_ (#562, #583)
+* Added additional help entrypoints, thanks to `@michaeljoseph`_ (#563, #492)
+* Added Two Scoops Academy to the README, thanks to `@hackebrot`_ (#576)
+* Now handling trailing slash on URL, thanks to `@ramiroluz`_ (#573, #546)
+* Support for testing x86 and x86-64 architectures on appveyor, thanks to `@maiksensi`_ (#567)
+* Made tests work without installing Cookiecutter, thanks to `@vincentbernat`_ (#550)
+* Encoded the result of the hook template to utf8, thanks to `@ionelmc`_ (#577. #578)
+* Added test for _run_hook_from_repo_dir, thanks to `@hackebrot`_ (#579, #580)
+* Implemented bumpversion, thanks to `@hackebrot`_ (#582)
+* Added more cookiecutter templates to the mix:
+
+  * `cookiecutter-octoprint-plugin`_ by `@foosel`_ (#560)
+  * `wagtail-cookiecutter-foundation`_ by `@chrisdev`_, et al. (#566)
+
+.. _`@foosel`: https://github.com/foosel
+.. _`@chrisdev`: https://github.com/chrisdev
+.. _`@jhermann`: https://github.com/jhermann
+
+.. _`cookiecutter-octoprint-plugin`: https://github.com/OctoPrint/cookiecutter-octoprint-plugin
+.. _`wagtail-cookiecutter-foundation`: https://github.com/chrisdev/wagtail-cookiecutter-foundation
+
+
 1.2.1 (2015-10-18) Zimtsterne
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
