@@ -19,7 +19,7 @@ Build-Depends: debhelper (>= 7.0.50~), dh-python,
                python-whichcraft, python3-whichcraft
 Standards-Version: 3.9.6
 Homepage: https://github.com/audreyr/cookiecutter
-Vcs-Git: git://anonscm.debian.org/python-modules/packages/cookiecutter.git
+Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/cookiecutter.git
 Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/cookiecutter.git
 
 Package: cookiecutter
