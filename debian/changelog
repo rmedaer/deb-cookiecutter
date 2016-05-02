@@ -5,6 +5,7 @@ cookiecutter (1.4.0-1) UNRELEASED; urgency=medium
 
   [ Vincent Bernat ]
   * New upstream version.
+  * Update build-dependencies.
 
  -- Vincent Bernat <bernat@debian.org>  Mon, 02 May 2016 08:05:57 +0200
 
