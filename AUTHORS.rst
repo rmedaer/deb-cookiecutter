@@ -77,7 +77,16 @@ Contributors
 * Valentin Lab (`@vaab`_)
 * Ilja Bauer (`@iljabauer`_)
 * Elias Dorneles (`@eliasdorneles`_)
+* Matias Saguir (`@mativs`_)
+* Johannes (`@johtso`_)
+* macrotim (`@macrotim`_)
+* Will McGinnis (`@wdm0006`_)
+* Cédric Krier (`@cedk`_)
+* Tim Osborn (`@ptim`_)
+* Aaron Gallagher (`@habnabit`_)
 
+.. _`@cedk`: https://github.com/cedk
+.. _`@johtso`: https://github.com/johtso
 .. _`@maiksensi`: https://github.com/maiksensi
 .. _`@svisser`: https://github.com/svisser
 .. _`@LucianU`: https://github.com/LucianU
@@ -142,3 +151,8 @@ Contributors
 .. _`@vaab`: https://github.com/vaab
 .. _`@iljabauer`: https://github.com/iljabauer
 .. _`@eliasdorneles`: https://github.com/eliasdorneles
+.. _`@mativs`: https://github.com/mativs
+.. _`@macrotim`: https://github.com/macrotim
+.. _`@wdm0006`: https://github.com/wdm0006
+.. _`@ptim`: https://github.com/ptim
+.. _`@habnabit`: https://github.com/habnabit

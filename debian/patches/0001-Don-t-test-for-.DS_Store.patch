@@ -1,4 +1,4 @@
-From 21abd3c3c0b9865cd6e59c15dc45a4bf3eedf4ee Mon Sep 17 00:00:00 2001
+From d189085cd62e6d083391e026349b2f6da56f3a5f Mon Sep 17 00:00:00 2001
 From: Vincent Bernat <vincent@bernat.im>
 Date: Mon, 16 Nov 2015 00:02:17 +0100
 Subject: Don't test for ".DS_Store"
@@ -9,7 +9,7 @@ This file is excluded during extraction by dpkg-source.
  1 file changed, 2 deletions(-)
 
 diff --git a/tests/test_generate_files.py b/tests/test_generate_files.py
-index f75b0db440ce..9307af1e6327 100644
+index 0d624532a9cd..84fe8a9c9d37 100644
 --- a/tests/test_generate_files.py
 +++ b/tests/test_generate_files.py
 @@ -113,11 +113,9 @@ def test_generate_files_binaries():
