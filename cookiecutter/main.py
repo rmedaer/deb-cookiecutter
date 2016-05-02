@@ -17,7 +17,7 @@ import os
 import re
 
 from .config import get_user_config, USER_CONFIG_PATH
-from .exceptions import InvalidModeException
+from .exceptions import InvalidModeException, RepositoryNotFound
 from .prompt import prompt_for_config
 from .generate import generate_context, generate_files
 from .vcs import clone
@@ -30,19 +30,18 @@ builtin_abbreviations = {
     'bb': 'https://bitbucket.org/{0}',
 }
 
-REPO_REGEX = """
-(
-((git|ssh|https|http):(//)?)    # something like git:// ssh:// etc.
- |                              # or
- (\w+@[\w\.]+)                  # something like user@...
+REPO_REGEX = re.compile(r"""
+(?x)
+((((git|hg)\+)?(git|ssh|https?):(//)?)  # something like git:// ssh:// etc.
+ |                                      # or
+ (\w+@[\w\.]+)                          # something like user@...
 )
-.*
-"""
+""")
 
 
 def is_repo_url(value):
     """Return True if value is a repository URL."""
-    return bool(re.match(REPO_REGEX, value, re.VERBOSE))
+    return bool(REPO_REGEX.match(value))
 
 
 def expand_abbreviations(template, config_dict):
@@ -112,10 +111,15 @@ def cookiecutter(
         # cookiecutters_dir
         repo_dir = template
 
+    if not os.path.isdir(repo_dir):
+        raise RepositoryNotFound(
+            'The repository {0} could not be located.'.format(template)
+        )
+
     template_name = os.path.basename(template)
 
     if replay:
-        context = load(template_name)
+        context = load(config_dict['replay_dir'], template_name)
     else:
         context_file = os.path.join(repo_dir, 'cookiecutter.json')
         logging.debug('context_file is {0}'.format(context_file))
@@ -130,7 +134,7 @@ def cookiecutter(
         # except when 'no-input' flag is set
         context['cookiecutter'] = prompt_for_config(context, no_input)
 
-        dump(template_name, context)
+        dump(config_dict['replay_dir'], template_name, context)
 
     # Create project from local context and project template.
     return generate_files(
