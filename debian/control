@@ -17,7 +17,8 @@ Build-Depends: debhelper (>= 7.0.50~), dh-python,
                python-pytest-mock, python3-pytest-mock,
                python-click, python3-click,
                python-future, python3-future,
-               python-whichcraft, python3-whichcraft
+               python-whichcraft, python3-whichcraft,
+               python-freezegun, python3-freezegun
 Standards-Version: 3.9.6
 Homepage: https://github.com/audreyr/cookiecutter
 Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/cookiecutter.git
