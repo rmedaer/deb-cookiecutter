@@ -30,7 +30,7 @@ requirements = [
     'jinja2>=2.7',
     'click>=5.0',
     'whichcraft>=0.1.1',
-    'poyo>=0.1.0',
+    'PyYAML',
     'jinja2-time>=0.1.0'
 ]
 
