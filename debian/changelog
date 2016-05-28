@@ -7,6 +7,7 @@ cookiecutter (1.4.0-1) UNRELEASED; urgency=medium
   * New upstream version.
   * Update build-dependencies.
   * Add a patch to use PyYAML instead of poyo.
+  * Bump Standards-Version. No changes.
 
  -- Vincent Bernat <bernat@debian.org>  Mon, 02 May 2016 08:05:57 +0200
 
