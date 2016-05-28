@@ -1,4 +1,4 @@
-cookiecutter (1.4.0-1) UNRELEASED; urgency=medium
+cookiecutter (1.4.0-1) unstable; urgency=medium
 
   [ Ondřej Nový ]
   * Fixed VCS URL (https)
@@ -9,7 +9,7 @@ cookiecutter (1.4.0-1) UNRELEASED; urgency=medium
   * Add a patch to use PyYAML instead of poyo.
   * Bump Standards-Version. No changes.
 
- -- Vincent Bernat <bernat@debian.org>  Mon, 02 May 2016 08:05:57 +0200
+ -- Vincent Bernat <bernat@debian.org>  Sat, 28 May 2016 15:10:58 +0200
 
 cookiecutter (1.3.0-2) unstable; urgency=medium
 
