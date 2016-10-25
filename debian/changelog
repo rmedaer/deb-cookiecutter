@@ -1,3 +1,10 @@
+cookiecutter (1.4.0-3) UNRELEASED; urgency=medium
+
+  * Make the build reproducible by avoiding nondeterministic kwargs.
+    Closes: #834861.
+
+ -- Vincent Bernat <bernat@debian.org>  Tue, 25 Oct 2016 08:54:22 +0200
+
 cookiecutter (1.4.0-2) unstable; urgency=medium
 
   * Build-Depends on python-sphinx-rtd-theme. Closes: #829364.
