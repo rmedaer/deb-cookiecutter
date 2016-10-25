@@ -1,14 +1,16 @@
-From 2bfe6ead4bc4415d5c68aa249c2c7039a2da6ceb Mon Sep 17 00:00:00 2001
+From 33756fe4b6713bb4f492a80579ce5e520fe5e847 Mon Sep 17 00:00:00 2001
 From: Vincent Bernat <vincent@bernat.im>
 Date: Tue, 25 Oct 2016 09:00:50 +0200
 Subject: Remove all privacy-breach images from documentation
 
 ---
- README.rst | 40 +++-------------------------------------
- 1 file changed, 3 insertions(+), 37 deletions(-)
+ README.rst                   | 40 +++-------------------------------------
+ docs/cookiecutter_medium.png |  1 +
+ 2 files changed, 4 insertions(+), 37 deletions(-)
+ create mode 120000 docs/cookiecutter_medium.png
 
 diff --git a/README.rst b/README.rst
-index 82ea8ab11586..2ee8216c26d3 100644
+index 82ea8ab11586..4a8437676d3b 100644
 --- a/README.rst
 +++ b/README.rst
 @@ -2,36 +2,6 @@
@@ -53,7 +55,7 @@ index 82ea8ab11586..2ee8216c26d3 100644
  * PyPI: https://pypi.python.org/pypi/cookiecutter
  
 -.. image:: https://raw.github.com/audreyr/cookiecutter/aa309b73bdc974788ba265d843a65bb94c2e608e/cookiecutter_medium.png
-+.. image:: cookiecutter_medium.png ../cookiecutter_medium.png 
++.. image:: cookiecutter_medium.png
  
  Features
  --------
@@ -73,3 +75,11 @@ index 82ea8ab11586..2ee8216c26d3 100644
  
  Code of Conduct
  ---------------
+diff --git a/docs/cookiecutter_medium.png b/docs/cookiecutter_medium.png
+new file mode 120000
+index 000000000000..a643810a7e7f
+--- /dev/null
++++ b/docs/cookiecutter_medium.png
+@@ -0,0 +1 @@
++../cookiecutter_medium.png
+\ No newline at end of file
