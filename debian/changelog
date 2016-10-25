@@ -4,6 +4,7 @@ cookiecutter (1.4.0-3) UNRELEASED; urgency=medium
     Closes: #834861.
   * Change section for "cookiecutter" binary package to "devel".
     Closes: #832198.
+  * Remove any privacy-breach images from documentation. Closes: #836159.
 
  -- Vincent Bernat <bernat@debian.org>  Tue, 25 Oct 2016 08:54:22 +0200
 
