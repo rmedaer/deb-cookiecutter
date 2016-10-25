@@ -2,6 +2,8 @@ cookiecutter (1.4.0-3) UNRELEASED; urgency=medium
 
   * Make the build reproducible by avoiding nondeterministic kwargs.
     Closes: #834861.
+  * Change section for "cookiecutter" binary package to "devel".
+    Closes: #832198.
 
  -- Vincent Bernat <bernat@debian.org>  Tue, 25 Oct 2016 08:54:22 +0200
 

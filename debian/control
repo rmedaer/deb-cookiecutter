@@ -25,6 +25,7 @@ Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/cookiecutter.git
 Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/cookiecutter.git
 
 Package: cookiecutter
+Section: devel
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends},
          python-cookiecutter (= ${binary:Version})
