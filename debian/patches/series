@@ -1,2 +1,3 @@
 0001-Don-t-test-for-.DS_Store.patch
 0002-Use-PyYAML-instead-of-poyo.patch
+0003-Make-the-build-reproducible-by-avoiding-nondetermini.patch

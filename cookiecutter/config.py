@@ -22,6 +22,7 @@ from .exceptions import InvalidConfiguration
 
 logger = logging.getLogger(__name__)
 
+NOT_PROVIDED = object()
 USER_CONFIG_PATH = os.path.expanduser('~/.cookiecutterrc')
 
 DEFAULT_CONFIG = {
@@ -68,7 +69,7 @@ def get_config(config_path):
     return config_dict
 
 
-def get_user_config(config_file=USER_CONFIG_PATH):
+def get_user_config(config_file=NOT_PROVIDED):
     """Retrieve the config from a file or return the defaults if None is
     passed. If an environment variable `COOKIECUTTER_CONFIG` is set up, try
     to load its value. Otherwise fall back to a default file or config.
@@ -76,6 +77,10 @@ def get_user_config(config_file=USER_CONFIG_PATH):
     # Do NOT load a config. Return defaults instead.
     if config_file is None:
         return copy.copy(DEFAULT_CONFIG)
+
+    # Differentiate between being passed ``None`` and the default.
+    if config_file is NOT_PROVIDED:
+        config_file = USER_CONFIG_PATH
 
     # Load the given config file
     if config_file and config_file is not USER_CONFIG_PATH:
