@@ -3,6 +3,248 @@
 History
 -------
 
+1.5.0 (2016-12-18) Alfajor
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The primary goal of this release was to add command-line support for passing
+extra context, address minor bugs and make a number of improvements.
+
+New Features:
+
+* Inject extra context with command-line arguments, thanks to `@msabramo`_ and
+  `@michaeljoseph`_ (#666).
+* Updated conda installation instructions to work with the new conda-forge
+  distribution of Cookiecutter, thanks to `@pydanny`_ and especially
+  `@bollwyvl`_ (#232, #705).
+* Refactor code responsible for interaction with version control systems and
+  raise better error messages, thanks to `@michaeljoseph`_ (#778).
+* Add support for executing cookiecutter using ``python -m cookiecutter`` or
+  from a checkout/zip file, thanks to `@brettcannon`_ (#788).
+* New CLI option ``--debug-file PATH`` to store a log file on disk. By default
+  no log file is written.  Entries for ``DEBUG`` level and higher. Thanks to
+  `@hackebrot`_ (#792).
+* Existing templates in a user's ``cookiecutters_dir`` (default is
+  ``~/.cookiecutters/``) can now be referenced by directory name, thanks to
+  `@michaeljoseph`_ (#825).
+* Add support for dict values in ``cookiecutter.json``, thanks to
+  `@freakboy3742`_ and `@hackebrot`_ (#815, #858).
+* Add a ``jsonify`` filter to default jinja2 extensions that json.dumps a
+  Python object into a string, thanks to `@aroig`_ (#791).
+
+Bug Fixes:
+
+* Fix typo in the error logging text for when a hook did not exit successfully,
+  thanks to `@luzfcb`_ (#656)
+* Fix an issue around **replay** file names when **cookiecutter** is used with
+  a relative path to a template, thanks to `@eliasdorneles`_ for raising the
+  issue and `@hackebrot`_ for the PR (#752, #753)
+* Ignore hook files with tilde-suffixes, thanks to `@hackebrot`_ (#768)
+* Fix a minor issue with the code that generates a name for a template, thanks
+  to `@hackebrot`_ (#798)
+* Handle empty hook file or other OS errors, thanks to `@christianmlong`_ for
+  raising this bug and `@jcarbaugh`_ and `@hackebrot`_ for the fix (#632, #729,
+  #862)
+* Resolve an issue with custom extensions not being loaded for
+  ``pre_gen_project`` and ``post_gen_project`` hooks, thanks to `@cheungnj`_
+  (#860)
+
+Other Changes:
+
+* Remove external dependencies from tests, so that tests can be run w/o network
+  connection, thanks to `@hackebrot`_ (#603)
+* Remove execute permissions on Python files, thanks to `@mozillazg`_ (#650)
+* Report code coverage info from AppVeyor build to codecov, thanks to
+  `@ewjoachim`_ (#670)
+* Documented functions and methods lacking documentation, thanks to `@pydanny`_
+  (#673)
+* Documented ``__init__`` methods for Environment objects, thanks to
+  `@pydanny`_ (#677)
+* Updated whichcraft to 0.4.0, thanks to `@pydanny`_.
+* Updated documentation link to Read the Docs, thanks to `@natim`_ (#687)
+* Moved cookiecutter templates and added category links, thanks to
+  `@willingc`_ (#674)
+* Added Github Issue Template, thanks to `@luzfcb`_ (#700)
+* Added ``ssh`` repository examples, thanks to `@pokoli`_ (#702)
+* Fix links to the cookiecutter-data-science template and its documentation,
+  thanks to `@tephyr`_ for the PR and `@willingc`_ for the review (#711, #714)
+* Update link to docs for Django's ``--template`` command line option, thanks
+  to `@purplediane`_ (#754)
+* Create *hook backup files* during the tests as opposed to having them as
+  static files in the repository, thanks to `@hackebrot`_ (#789)
+* Applied PEP 257 docstring conventions to:
+
+  * ``environment.py``, thanks to `@terryjbates`_ (#759)
+  * ``find.py``, thanks to `@terryjbates`_ (#761)
+  * ``generate.py``, thanks to `@terryjbates`_ (#764)
+  * ``hooks.py``, thanks to `@terryjbates`_ (#766)
+  * ``repository.py``, thanks to `@terryjbates`_ (#833)
+  * ``vcs.py``, thanks to `@terryjbates`_ (#831)
+
+* Fix link to the Tryton cookiecutter, thanks to `@cedk`_
+  and `@nicoe`_ (#697, #698)
+* Added PyCon US 2016 sponsorship to README, thanks to `@purplediane`_ (#720)
+* Added a sprint contributor doc, thanks to `@phoebebauer`_ (#727)
+* Converted readthedocs links (.org -> .io), thanks to `@adamchainz`_ (#718)
+* Added Python 3.6 support, thanks to `@suledev`_ (#728)
+* Update occurrences of ``repo_name`` in documentation, thanks to
+  `@palmerev`_ (#734)
+* Added case studies document, thanks to `@pydanny`_ (#735)
+* Added first steps cookiecutter creation tutorial, thanks to
+  `@BruceEckel`_ (#736)
+* Reorganised tutorials and setup git submodule to external tutorial, thanks
+  to `@dot2dotseurat`_ (#740)
+* Debian installation instructions, thanks to `@ivanlyon`_ (#738)
+* Usage documentation typo fix., thanks to `@terryjbates`_ (#739)
+* Updated documentation copyright date, thanks to `@zzzirk`_ (#747)
+* Add a make rule to update git submodules, thanks to `@hackebrot`_ (#746)
+* Split up advanced usage docs, thanks to `@zzzirk`_ (#749)
+* Documentation for the ``no_input`` option, thanks to `@pokoli`_ (#701)
+* Remove unnecessary shebangs from python files, thanks to `@michaeljoseph`_
+  (#763)
+* Refactor cookiecutter template identification, thanks to `@michaeljoseph`_
+  (#777)
+* Add a ``cli_runner`` test fixture to simplify CLI tests, thanks to
+  `@hackebrot`_ (#790)
+* Add a check to ensure cookiecutter repositories have JSON context, thanks to
+  `@michaeljoseph`_ (#782)
+* Rename the internal function that determines whether a file should be
+  rendered, thanks to `@audreyr`_ for raising the issue and `@hackebrot`_ for
+  the PR (#741, #802)
+* Fix typo in docs, thanks to `@mwarkentin`_ (#828)
+* Fix broken link to *Invoke* docs, thanks to `@B3QL`_ (#820)
+* Add documentation to ``render_variable`` function in ``prompt.py``, thanks to
+  `@pydanny`_ (#678)
+* Fix python3.6 travis-ci and tox configuration, thanks to `@luzfcb`_ (#844)
+* Add missing encoding declarations to python files, thanks to `@andytom`_
+  (#852)
+* Disable poyo logging for tests, thanks to `@hackebrot`_ (#855)
+* Remove pycache directories in make clean-pyc, thanks to `@hackebrot`_ (#849)
+* Refactor hook system to only find the requested hook, thanks to
+  `@michaeljoseph`_ (#834)
+* Add tests for custom extensions in ``pre_gen_project`` and
+  ``post_gen_project`` hooks, thanks to `@hackebrot`_ (#856)
+* Make the build reproducible by avoiding nondeterministic keyword arguments,
+  thanks to `@lamby`_ and `@hackebrot`_ (#800, #861)
+* Extend CLI help message and point users to the github project to engage with
+  the community, thanks to `@hackebrot`_ (#859)
+* Added more cookiecutter templates to the mix:
+
+  * `cookiecutter-funkload-friendly`_ by `@tokibito`_ (#657)
+  * `cookiecutter-reveal.js`_ by `@keimlink`_ (#660)
+  * `cookiecutter-python-app`_ by `@mdklatt`_ (#659)
+  * `morepath-cookiecutter`_ by `@href`_ (#672)
+  * `hovercraft-slides`_ by `@jhermann`_ (#665)
+  * `cookiecutter-es6-package`_ by `@ratson`_ (#667)
+  * `cookiecutter-webpack`_ by `@hzdg`_ (#668)
+  * `cookiecutter-django-herokuapp`_ by `@dulaccc`_ (#374)
+  * `cookiecutter-django-aws-eb`_ by `@peterlauri`_ (#626)
+  * `wagtail-starter-kit`_ by `@tkjone`_ (#658)
+  * `cookiecutter-dpf-effect`_ by `@SpotlightKid`_ (#663)
+  * `cookiecutter-dpf-audiotk`_ by `@SpotlightKid`_ (#663)
+  * `cookiecutter-template`_ by `@eviweb`_ (#664)
+  * `cookiecutter-angular2`_ by `@matheuspoleza`_ (#675)
+  * `cookiecutter-data-science`_ by `@pjbull`_ (#680)
+  * `cc_django_ember_app`_ by `@nanuxbe`_ (#686)
+  * `cc_project_app_drf`_ by `@nanuxbe`_ (#686)
+  * `cc_project_app_full_with_hooks`_ by `@nanuxbe`_ (#686)
+  * `beat-generator`_ by `@ruflin`_ (#695)
+  * `cookiecutter-scala`_ by `@Plippe`_ (#751)
+  * `cookiecutter-snakemake-analysis-pipeline`_ by `@xguse`_ (#692)
+  * `cookiecutter-py3tkinter`_ by `@ivanlyon`_ (#730)
+  * `pyramid-cookiecutter-alchemy`_ by `@stevepiercy`_ (#745)
+  * `pyramid-cookiecutter-starter`_ by `@stevepiercy`_ (#745)
+  * `pyramid-cookiecutter-zodb`_ by `@stevepiercy`_ (#745)
+  * `substanced-cookiecutter`_ by `@stevepiercy`_ (#745)
+  * `cookiecutter-simple-django-cn`_ by `@shenyushun`_ (#765)
+  * `cookiecutter-pyqt5`_ by `@mandeepbhutani`_ (#797)
+  * `cookiecutter-xontrib`_ by `@laerus`_ (#817)
+  * `cookiecutter-reproducible-science`_ by `@mkrapp`_ (#826)
+  * `cc-automated-drf-template`_ by `@TAMU-CPT`_ (#832)
+
+.. _`@keimlink`: https://github.com/keimlink
+.. _`@luzfcb`: https://github.com/luzfcb
+.. _`@tokibito`: https://github.com/tokibito
+.. _`@mozillazg`: https://github.com/mozillazg
+.. _`@mdklatt`: https://github.com/mdklatt
+.. _`@ewjoachim`: https://github.com/ewjoachim
+.. _`@href`: https://github.com/href
+.. _`@jhermann`: https://github.com/jhermann
+.. _`@ratson`: https://github.com/ratson
+.. _`@hzdg`: https://github.com/hzdg
+.. _`@dulaccc`: :https://github.com/dulaccc
+.. _`@peterlauri`: https://github.com/peterlauri
+.. _`@SpotlightKid`: https://github.com/SpotlightKid
+.. _`@eviweb`: https://github.com/eviweb
+.. _`@willingc`: https://github.com/willingc
+.. _`@matheuspoleza`: https://github.com/matheuspoleza
+.. _`@pjbull`: https://github.com/pjbull
+.. _`@nanuxbe`: https://github.com/nanuxbe
+.. _`@ruflin`: https://github.com/ruflin
+.. _`@tephyr`: https://github.com/tephyr
+.. _`@bollwyvl`: https://github.com/bollwyvl
+.. _`@purplediane`: https://github.com/purplediane
+.. _`@Plippe`: https://github.com/Plippe
+.. _`@terryjbates`: https://github.com/terryjbates
+.. _`@cedk`: https://github.com/cedk
+.. _`@nicoe`: https://github.com/nicoe
+.. _`@phoebebauer`: https://github.com/phoebebauer
+.. _`@adamchainz`: https://github.com/adamchainz
+.. _`@suledev`: https://github.com/suledev
+.. _`@palmerev`: https://github.com/palmerev
+.. _`@BruceEckel`: https://github.com/BruceEckel
+.. _`@dot2dotseurat`: https://github.com/dot2dotseurat
+.. _`@ivanlyon`: https://github.com/ivanlyon
+.. _`@zzzirk`: https://github.com/zzzirk
+.. _`@xguse`: https://github.com/xguse
+.. _`@stevepiercy`: https://github.com/stevepiercy
+.. _`@shenyushun`: https://github.com/shenyushun
+.. _`@brettcannon`: https://github.com/brettcannon
+.. _`@mandeepbhutani`: https://github.com/mandeepbhutani
+.. _`@mwarkentin`: https://github.com/mwarkentin
+.. _`@B3QL`: https://github.com/B3QL
+.. _`@laerus`: https://github.com/laerus
+.. _`@mkrapp`: https://github.com/mkrapp
+.. _`@TAMU-CPT`: https://github.com/TAMU-CPT
+.. _`@andytom`: https://github.com/andytom
+.. _`@lamby`: https://github.com/lamby
+.. _`@christianmlong`: https://github.com/christianmlong
+.. _`@jcarbaugh`: https://github.com/jcarbaugh
+.. _`@cheungnj`: https://github.com/cheungnj
+.. _`@aroig`: https://github.com/aroig
+
+.. _`cookiecutter-pyqt5`: https://github.com/mandeepbhutani/cookiecutter-pyqt5
+.. _`cookiecutter-funkload-friendly`: https://github.com/tokibito/cookiecutter-funkload-friendly
+.. _`cookiecutter-reveal.js`: https://github.com/keimlink/cookiecutter-reveal.js
+.. _`cookiecutter-python-app`: https://github.com/mdklatt/cookiecutter-python-app
+.. _`morepath-cookiecutter`: https://github.com/morepath/morepath-cookiecutter
+.. _`hovercraft-slides`: https://github.com/Springerle/hovercraft-slides
+.. _`cookiecutter-es6-package`: https://github.com/ratson/cookiecutter-es6-package
+.. _`cookiecutter-webpack`: https://github.com/hzdg/cookiecutter-webpack
+.. _`cookiecutter-django-herokuapp`: https://github.com/dulaccc/cookiecutter-django-herokuapp
+.. _`cookiecutter-django-aws-eb`: https://github.com/dolphinkiss/cookiecutter-django-aws-eb
+.. _`wagtail-starter-kit`: https://github.com/tkjone/wagtail-starter-kit
+.. _`cookiecutter-dpf-effect`: https://github.com/SpotlightKid/cookiecutter-dpf-effect
+.. _`cookiecutter-dpf-audiotk`: https://github.com/SpotlightKid/cookiecutter-dpf-audiotk
+.. _`cookiecutter-template`: https://github.com/eviweb/cookiecutter-template
+.. _`cookiecutter-angular2`: https://github.com/matheuspoleza/cookiecutter-angular2
+.. _`cookiecutter-data-science`: http://drivendata.github.io/cookiecutter-data-science/
+.. _`cc_django_ember_app`: https://bitbucket.org/levit_scs/cc_django_ember_app
+.. _`cc_project_app_drf`: https://bitbucket.org/levit_scs/cc_project_app_drf
+.. _`cc_project_app_full_with_hooks`: https://bitbucket.org/levit_scs/cc_project_app_full_with_hooks
+.. _`beat-generator`: https://github.com/elastic/beat-generator
+.. _`cookiecutter-scala`: https://github.com/Plippe/cookiecutter-scala
+.. _`cookiecutter-snakemake-analysis-pipeline`: https://github.com/xguse/cookiecutter-snakemake-analysis-pipeline
+.. _`cookiecutter-py3tkinter`: https://github.com/ivanlyon/cookiecutter-py3tkinter
+.. _`pyramid-cookiecutter-alchemy`: https://github.com/Pylons/pyramid-cookiecutter-alchemy
+.. _`pyramid-cookiecutter-starter`: https://github.com/Pylons/pyramid-cookiecutter-starter
+.. _`pyramid-cookiecutter-zodb`: https://github.com/Pylons/pyramid-cookiecutter-zodb
+.. _`substanced-cookiecutter`: https://github.com/Pylons/substanced-cookiecutter
+.. _`cookiecutter-simple-django-cn`: https://github.com/shenyushun/cookiecutter-simple-django-cn
+.. _`cookiecutter-xontrib`: https://github.com/laerus/cookiecutter-xontrib
+.. _`cookiecutter-reproducible-science`: https://github.com/mkrapp/cookiecutter-reproducible-science
+.. _`cc-automated-drf-template`: https://github.com/TAMU-CPT/cc-automated-drf-template
+
+
 1.4.0 (2016-03-20) Shortbread
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -35,7 +277,7 @@ Bug Fixes:
 
 .. _poyo: https://pypi.python.org/pypi/poyo
 .. _`jinja2-time`: https://pypi.python.org/pypi/jinja2-time
-.. _`private repository`: http://cookiecutter.readthedocs.org/en/latest/usage.html#works-with-private-repos
+.. _`private repository`: http://cookiecutter.readthedocs.io/en/latest/usage.html#works-with-private-repos
 
 Other Changes:
 
@@ -58,7 +300,7 @@ Other Changes:
   * `cookiecutter-pipproject`_ by `@wdm0006`_ (#624)
   * `cookiecutter-flask-2`_ by `@wdm0006`_ (#624)
   * `cookiecutter-kotlin-gradle`_ by `@thomaslee`_ (#622)
-  * `cookiecutter-tryton`_ by `@cedk`_ (#631)
+  * `cookiecutter-tryton-fulfilio`_ by `@cedk`_ (#631)
   * `django-starter`_ by `@tkjone`_ (#635)
   * `django-docker-bootstrap`_ by `@legios89`_ (#636)
   * `cookiecutter-mediawiki-extension`_ by `@JonasGroeger`_ (#645)
@@ -88,8 +330,9 @@ Other Changes:
 .. _`django-docker-bootstrap`: https://github.com/legios89/django-docker-bootstrap
 .. _`cookiecutter-mediawiki-extension`: https://github.com/JonasGroeger/cookiecutter-mediawiki-extension
 .. _`cookiecutter-django-gulp`: https://github.com/valerymelou/cookiecutter-django-gulp
+.. _`cookiecutter-tryton-fulfilio`: https://github.com/fulfilio/cookiecutter-tryton
 
-.. _`_copy_without_render`: http://cookiecutter.readthedocs.org/en/latest/advanced_usage.html#copy-without-render
+.. _`_copy_without_render`: http://cookiecutter.readthedocs.io/en/latest/advanced_usage.html#copy-without-render
 
 1.3.0 (2015-11-10) Pumpkin Spice
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -214,7 +457,7 @@ Other Changes:
   * `cookiecutter-wagtail`_ by `@torchbox`_ (#533)
 
 .. _`@maiksensi`: https://github.com/maiksensi
-.. _`copy without render`: http://cookiecutter.readthedocs.org/en/latest/advanced_usage.html#copy-without-render
+.. _`copy without render`: http://cookiecutter.readthedocs.io/en/latest/advanced_usage.html#copy-without-render
 .. _`@osantana`: https://github.com/osantana
 .. _`@LucianU`: https://github.com/LucianU
 .. _`@svisser`: https://github.com/svisser

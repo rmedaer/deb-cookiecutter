@@ -1,4 +1,4 @@
-.PHONY: clean-pyc clean-build docs
+.PHONY: clean-tox clean-pyc clean-build docs
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
 try:
@@ -14,6 +14,7 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@echo "clean-build - remove build artifacts"
 	@echo "clean-pyc - remove Python file artifacts"
+	@echo "clean-tox - remove tox testing artifacts"
 	@echo "lint - check style with flake8"
 	@echo "test - run tests quickly with the default Python"
 	@echo "test-all - run tests on every Python version with tox"
@@ -21,8 +22,9 @@ help:
 	@echo "docs - generate Sphinx HTML documentation, including API docs"
 	@echo "release - package and upload a release"
 	@echo "sdist - package"
+	@echo "submodules - pull and update git submodules recursively"
 
-clean: clean-build clean-pyc
+clean: clean-tox clean-build clean-pyc
 
 clean-build:
 	rm -fr build/
@@ -30,9 +32,12 @@ clean-build:
 	rm -fr *.egg-info
 
 clean-pyc:
-	find . -name '*.pyc' -exec rm -f {} +
-	find . -name '*.pyo' -exec rm -f {} +
+	find . -type d -name '__pycache__' -exec rm -rf {} +
+	find . -type f -name '*.py[co]' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
+
+clean-tox:
+	rm -rf .tox/
 
 lint:
 	flake8 cookiecutter tests
@@ -47,6 +52,10 @@ test-all:
 coverage:
 	tox -e cov-report
 	$(BROWSER) htmlcov/index.html
+
+submodules:
+	git pull --recurse-submodules
+	git submodule update --init --recursive
 
 docs:
 	rm -f docs/cookiecutter.rst

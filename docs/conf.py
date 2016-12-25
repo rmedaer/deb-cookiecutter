@@ -20,7 +20,7 @@ import sys, os
 
 # For building docs in foreign environments where we don't have all our
 # dependencies (like readthedocs), mock out imports that cause sphinx to fail.
-# see: https://docs.readthedocs.org/en/latest/faq.html#i-get-import-errors-on-libraries-that-depend-on-c-modules
+# see: https://docs.readthedocs.io/en/latest/faq.html#i-get-import-errors-on-libraries-that-depend-on-c-modules
 
 import sys
 
@@ -79,7 +79,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'cookiecutter'
-copyright = u'2013-2015, Audrey Roy'
+copyright = u'2013-2016, Audrey Roy'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -292,7 +292,7 @@ texinfo_documents = [
 epub_title = u'cookiecutter'
 epub_author = u'Audrey Roy'
 epub_publisher = u'Audrey Roy'
-epub_copyright = u'2013-2015, Audrey Roy'
+epub_copyright = u'2013-2016, Audrey Roy'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

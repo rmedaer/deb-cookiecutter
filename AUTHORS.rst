@@ -84,6 +84,27 @@ Contributors
 * Cédric Krier (`@cedk`_)
 * Tim Osborn (`@ptim`_)
 * Aaron Gallagher (`@habnabit`_)
+* Fábio C. Barrionuevo da Luz (`@luzfcb`_)
+* mozillazg (`@mozillazg`_)
+* Joachim Jablon (`@ewjoachim`_)
+* Andrew Ittner (`@tephyr`_)
+* Diane DeMers Chen (`@purplediane`_)
+* zzzirk (`@zzzirk`_)
+* Carol Willing (`@willingc`_)
+* phoebebauer (`@phoebebauer`_)
+* Adam Chainz (`@adamchainz`_)
+* Sulé (`@suledev`_)
+* Evan Palmer (`@palmerev`_)
+* Bruce Eckel (`@BruceEckel`_)
+* Robert Lyon (`@ivanlyon`_)
+* Terry Bates (`@terryjbates`_)
+* Brett Cannon (`@brettcannon`_)
+* Michael Warkentin (`@mwarkentin`_)
+* Bartłomiej Kurzeja (`@B3QL`_)
+* Thomas O'Donnell (`@andytom`_)
+* Jeremy Carbaugh (`@jcarbaugh`_)
+* Nathan Cheung (`@cheungnj`_)
+* Abdó Roig-Maranges (`@aroig`_)
 
 .. _`@cedk`: https://github.com/cedk
 .. _`@johtso`: https://github.com/johtso
@@ -156,3 +177,24 @@ Contributors
 .. _`@wdm0006`: https://github.com/wdm0006
 .. _`@ptim`: https://github.com/ptim
 .. _`@habnabit`: https://github.com/habnabit
+.. _`@luzfcb`: https://github.com/luzfcb
+.. _`@mozillazg`: https://github.com/mozillazg
+.. _`@ewjoachim`: https://github.com/ewjoachim
+.. _`@tephyr`: https://github.com/tephyr
+.. _`@purplediane`: https://github.com/purplediane
+.. _`@willingc`: https://github.com/willingc
+.. _`@phoebebauer`: https://github.com/phoebebauer
+.. _`@adamchainz`: https://github.com/adamchainz
+.. _`@suledev`: https://github.com/suledev
+.. _`@palmerev`: https://github.com/palmerev
+.. _`@BruceEckel`: https://github.com/BruceEckel
+.. _`@ivanlyon`: https://github.com/ivanlyon
+.. _`@terryjbates`: https://github.com/terryjbates
+.. _`@zzzirk`: https://github.com/zzzirk
+.. _`@brettcannon`: https://github.com/brettcannon
+.. _`@mwarkentin`: https://github.com/mwarkentin
+.. _`@B3QL`: https://github.com/B3QL
+.. _`@andytom`: https://github.com/andytom
+.. _`@jcarbaugh`: https://github.com/jcarbaugh
+.. _`@cheungnj`: https://github.com/cheungnj
+.. _`@aroig`: https://github.com/aroig
