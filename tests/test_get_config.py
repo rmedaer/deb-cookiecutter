@@ -1,17 +1,4 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-"""
-test_get_config
----------------
-
-Tests formerly known from a unittest residing in test_config.py named
-TestGetConfig.test_get_config
-TestGetConfig.test_get_config_does_not_exist
-TestGetConfig.test_invalid_config
-TestGetConfigWithDefaults.test_get_config_with_defaults
-"""
-
 import os
 import pytest
 
@@ -33,6 +20,10 @@ def test_get_config():
             'full_name': 'Firstname Lastname',
             'email': 'firstname.lastname@gmail.com',
             'github_username': 'example'
+        },
+        'abbreviations': {
+            'gh': 'https://github.com/{0}.git',
+            'bb': 'https://bitbucket.org/{0}',
         }
     }
     assert conf == expected_conf
@@ -76,6 +67,10 @@ def test_get_config_with_defaults():
             'full_name': 'Firstname Lastname',
             'email': 'firstname.lastname@gmail.com',
             'github_username': 'example'
+        },
+        'abbreviations': {
+            'gh': 'https://github.com/{0}.git',
+            'bb': 'https://bitbucket.org/{0}',
         }
     }
     assert conf == expected_conf

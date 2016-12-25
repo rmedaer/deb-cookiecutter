@@ -1,12 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-cookiecutter.vcs
-----------------
-
-Helper functions for working with version control systems.
-"""
+"""Helper functions for working with version control systems."""
 
 from __future__ import unicode_literals
 import logging
@@ -16,27 +10,36 @@ import sys
 
 from whichcraft import which
 
-from .exceptions import UnknownRepoType, VCSNotInstalled
+from .exceptions import (
+    RepositoryNotFound, RepositoryCloneFailed, UnknownRepoType, VCSNotInstalled
+)
 from .prompt import read_user_yes_no
 from .utils import make_sure_path_exists, rmtree
 
+logger = logging.getLogger(__name__)
+
+
+BRANCH_ERRORS = [
+    'error: pathspec',
+    'unknown revision',
+]
+
 
 def prompt_and_delete_repo(repo_dir, no_input=False):
-    """
-    Asks the user whether it's okay to delete the previously-cloned repo.
+    """Ask the user whether it's okay to delete the previously-cloned repo.
+
     If yes, deletes it. Otherwise, Cookiecutter exits.
 
     :param repo_dir: Directory of previously-cloned repo.
     :param no_input: Suppress prompt to delete repo and just delete it.
     """
-
     # Suppress prompt if called via API
     if no_input:
         ok_to_delete = True
     else:
         question = (
-            "You've cloned {0} before. "
-            'Is it okay to delete and re-clone it?'
+            "You've cloned {} before. "
+            "Is it okay to delete and re-clone it?"
         ).format(repo_dir)
 
         ok_to_delete = read_user_yes_no(question, 'yes')
@@ -48,12 +51,12 @@ def prompt_and_delete_repo(repo_dir, no_input=False):
 
 
 def identify_repo(repo_url):
-    """
-    Determines if `repo_url` should be treated as a URL to a git or hg repo.
-    Repos can be identified prepeding "hg+" or "git+" to repo URL.
+    """Determine if `repo_url` should be treated as a URL to a git or hg repo.
+
+    Repos can be identified by prepending "hg+" or "git+" to the repo URL.
 
     :param repo_url: Repo URL of unknown type.
-    :returns: ("git", repo_url), ("hg", repo_url), or None.
+    :returns: ('git', repo_url), ('hg', repo_url), or None.
     """
     repo_url_values = repo_url.split('+')
     if len(repo_url_values) == 2:
@@ -63,10 +66,10 @@ def identify_repo(repo_url):
         else:
             raise UnknownRepoType
     else:
-        if "git" in repo_url:
-            return "git", repo_url
-        elif "bitbucket" in repo_url:
-            return "hg", repo_url
+        if 'git' in repo_url:
+            return 'git', repo_url
+        elif 'bitbucket' in repo_url:
+            return 'hg', repo_url
         else:
             raise UnknownRepoType
 
@@ -80,9 +83,8 @@ def is_vcs_installed(repo_type):
     return bool(which(repo_type))
 
 
-def clone(repo_url, checkout=None, clone_to_dir=".", no_input=False):
-    """
-    Clone a repo to the current directory.
+def clone(repo_url, checkout=None, clone_to_dir='.', no_input=False):
+    """Clone a repo to the current directory.
 
     :param repo_url: Repo URL of unknown type.
     :param checkout: The branch, tag or commit ID to checkout after clone.
@@ -90,7 +92,6 @@ def clone(repo_url, checkout=None, clone_to_dir=".", no_input=False):
                          Defaults to the current directory.
     :param no_input: Suppress all user prompts when calling via API.
     """
-
     # Ensure that clone_to_dir exists
     clone_to_dir = os.path.expanduser(clone_to_dir)
     make_sure_path_exists(clone_to_dir)
@@ -110,15 +111,34 @@ def clone(repo_url, checkout=None, clone_to_dir=".", no_input=False):
                                                  tail.rsplit('.git')[0]))
     elif repo_type == 'hg':
         repo_dir = os.path.normpath(os.path.join(clone_to_dir, tail))
-    logging.debug('repo_dir is {0}'.format(repo_dir))
+    logger.debug('repo_dir is {0}'.format(repo_dir))
 
     if os.path.isdir(repo_dir):
         prompt_and_delete_repo(repo_dir, no_input=no_input)
 
-    if repo_type in ['git', 'hg']:
-        subprocess.check_call([repo_type, 'clone', repo_url], cwd=clone_to_dir)
+    try:
+        subprocess.check_output(
+            [repo_type, 'clone', repo_url],
+            cwd=clone_to_dir,
+            stderr=subprocess.STDOUT,
+        )
         if checkout is not None:
-            subprocess.check_call([repo_type, 'checkout', checkout],
-                                  cwd=repo_dir)
+            subprocess.check_output(
+                [repo_type, 'checkout', checkout],
+                cwd=repo_dir,
+                stderr=subprocess.STDOUT,
+            )
+    except subprocess.CalledProcessError as clone_error:
+        if 'not found' in clone_error.output.lower():
+            raise RepositoryNotFound(
+                'The repository {} could not be found, '
+                'have you made a typo?'.format(repo_url)
+            )
+        if any(error in clone_error.output for error in BRANCH_ERRORS):
+            raise RepositoryCloneFailed(
+                'The {} branch of repository {} could not found, '
+                'have you made a typo?'.format(checkout, repo_url)
+            )
+        raise
 
     return repo_dir

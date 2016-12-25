@@ -1,19 +1,19 @@
-From 33756fe4b6713bb4f492a80579ce5e520fe5e847 Mon Sep 17 00:00:00 2001
+From 3105ab76eb8f09bc974e42fc17ce859e453e2062 Mon Sep 17 00:00:00 2001
 From: Vincent Bernat <vincent@bernat.im>
 Date: Tue, 25 Oct 2016 09:00:50 +0200
 Subject: Remove all privacy-breach images from documentation
 
 ---
- README.rst                   | 40 +++-------------------------------------
+ README.rst                   | 29 +----------------------------
  docs/cookiecutter_medium.png |  1 +
- 2 files changed, 4 insertions(+), 37 deletions(-)
+ 2 files changed, 2 insertions(+), 28 deletions(-)
  create mode 120000 docs/cookiecutter_medium.png
 
 diff --git a/README.rst b/README.rst
-index 82ea8ab11586..4a8437676d3b 100644
+index 23b67be52f0c..15afbb9bff52 100644
 --- a/README.rst
 +++ b/README.rst
-@@ -2,36 +2,6 @@
+@@ -2,33 +2,6 @@
  Cookiecutter
  =============
  
@@ -25,9 +25,6 @@ index 82ea8ab11586..4a8437676d3b 100644
 -
 -.. image:: https://ci.appveyor.com/api/projects/status/github/audreyr/cookiecutter?branch=master
 -        :target: https://ci.appveyor.com/project/audreyr/cookiecutter/branch/master
--
--.. image:: https://img.shields.io/pypi/dm/cookiecutter.svg
--        :target: https://pypi.python.org/pypi/cookiecutter
 -
 -.. image:: https://codecov.io/github/audreyr/cookiecutter/coverage.svg?branch=master
 -        :target: https://codecov.io/github/audreyr/cookiecutter?branch=master
@@ -50,31 +47,15 @@ index 82ea8ab11586..4a8437676d3b 100644
  A command-line utility that creates projects from **cookiecutters** (project
  templates), e.g. creating a Python package project from a Python package project template.
  
-@@ -40,7 +10,7 @@ templates), e.g. creating a Python package project from a Python package project
+@@ -37,7 +10,7 @@ templates), e.g. creating a Python package project from a Python package project
  * Free software: BSD license
  * PyPI: https://pypi.python.org/pypi/cookiecutter
  
 -.. image:: https://raw.github.com/audreyr/cookiecutter/aa309b73bdc974788ba265d843a65bb94c2e608e/cookiecutter_medium.png
 +.. image:: cookiecutter_medium.png
  
- Features
- --------
-@@ -446,13 +416,9 @@ Waiting for a response to an issue/question?
- Support This Project
- --------------------
+ We are proud to be an open source sponsor of `PyCon 2016`_.
  
--This project is maintained by volunteers. Support their efforts by spreading the word about:
-+This project is maintained by volunteers. Support their efforts by spreading the word about `Two Scoops Academy`_.
- 
--.. image:: https://s3.amazonaws.com/tsacademy/images/tsa-logo-250x60-transparent-01.png
--   :name: Two Scoops Academy
--   :align: center
--   :alt: Two Scoops Academy
--   :target: http://www.twoscoops.academy/
-+.. _`Two Scoops Academy`: http://www.twoscoops.academy/
- 
- Code of Conduct
- ---------------
 diff --git a/docs/cookiecutter_medium.png b/docs/cookiecutter_medium.png
 new file mode 120000
 index 000000000000..a643810a7e7f

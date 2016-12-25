@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -8,10 +7,11 @@ test_hooks
 Tests for `cookiecutter.hooks` module.
 """
 
-import sys
 import os
-import stat
 import pytest
+import stat
+import sys
+import textwrap
 
 from cookiecutter import hooks, utils, exceptions
 
@@ -71,19 +71,30 @@ class TestFindHooks(object):
         """Finds the specified hook."""
 
         with utils.work_in(self.repo_path):
-            expected = {
-                'pre_gen_project': os.path.abspath('hooks/pre_gen_project.py'),
-                'post_gen_project': os.path.abspath(
-                    os.path.join('hooks', self.post_hook)
-                ),
-            }
-            assert expected == hooks.find_hooks()
+            expected_pre = os.path.abspath('hooks/pre_gen_project.py')
+            actual_hook_path = hooks.find_hook('pre_gen_project')
+            assert expected_pre == actual_hook_path
+
+            expected_post = os.path.abspath('hooks/{}'.format(self.post_hook))
+            actual_hook_path = hooks.find_hook('post_gen_project')
+            assert expected_post == actual_hook_path
 
     def test_no_hooks(self):
         """find_hooks should return None if the hook could not be found."""
 
         with utils.work_in('tests/fake-repo'):
-            assert {} == hooks.find_hooks()
+            assert None is hooks.find_hook('pre_gen_project')
+
+    def test_unknown_hooks_dir(self):
+        with utils.work_in(self.repo_path):
+            assert hooks.find_hook(
+                'pre_gen_project',
+                hooks_dir='hooks_dir'
+            ) is None
+
+    def test_hook_not_found(self):
+        with utils.work_in(self.repo_path):
+            assert hooks.find_hook('unknown_hook') is None
 
 
 class TestExternalHooks(object):
@@ -180,3 +191,45 @@ class TestExternalHooks(object):
             with pytest.raises(exceptions.FailedHookException) as excinfo:
                 hooks.run_hook('pre_gen_project', tests_dir, {})
             assert 'Hook script failed' in str(excinfo.value)
+
+
+@pytest.yield_fixture
+def dir_with_hooks(tmpdir):
+    """Yield a directory that contains hook backup files."""
+
+    hooks_dir = tmpdir.mkdir('hooks')
+
+    pre_hook_content = textwrap.dedent(
+        u"""
+        #!/usr/bin/env python
+        # -*- coding: utf-8 -*-
+        print('pre_gen_project.py~')
+        """
+    )
+    pre_gen_hook_file = hooks_dir / 'pre_gen_project.py~'
+    pre_gen_hook_file.write_text(pre_hook_content, encoding='utf8')
+
+    post_hook_content = textwrap.dedent(
+        u"""
+        #!/usr/bin/env python
+        # -*- coding: utf-8 -*-
+        print('post_gen_project.py~')
+        """
+    )
+
+    post_gen_hook_file = hooks_dir / 'post_gen_project.py~'
+    post_gen_hook_file.write_text(post_hook_content, encoding='utf8')
+
+    # Make sure to yield the parent directory as `find_hooks()`
+    # looks into `hooks/` in the current working directory
+    yield str(tmpdir)
+
+    pre_gen_hook_file.remove()
+    post_gen_hook_file.remove()
+
+
+def test_ignore_hook_backup_files(monkeypatch, dir_with_hooks):
+    # Change the current working directory that contains `hooks/`
+    monkeypatch.chdir(dir_with_hooks)
+    assert hooks.find_hook('pre_gen_project') is None
+    assert hooks.find_hook('post_gen_project') is None

@@ -18,10 +18,11 @@ Basics
    overview
    installation
    usage
+   first_steps
    tutorials
-   advanced_usage
+   advanced/index
    troubleshooting
-   
+
 .. _apiref:
 
 API Reference
@@ -29,7 +30,7 @@ API Reference
 
 .. toctree::
    :maxdepth: 2
-   
+
    cookiecutter
 
 Project Info
@@ -40,7 +41,9 @@ Project Info
 
    contributing
    authors
+   sprint-contributors
    history
+   case_studies
 
 Index
 -----
