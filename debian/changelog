@@ -1,3 +1,9 @@
+cookiecutter (1.5.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Vincent Bernat <bernat@debian.org>  Sun, 25 Dec 2016 20:59:55 +0100
+
 cookiecutter (1.4.0-3) unstable; urgency=medium
 
   * Make the build reproducible by avoiding nondeterministic kwargs.
