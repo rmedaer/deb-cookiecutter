@@ -1,3 +1,9 @@
+cookiecutter (1.5.0-1sid1) unstable; urgency=medium
+
+  * Applied SID patches.
+
+ -- Raphael Medaer <raphael@medaer.me>  Mon, 06 Mar 2017 16:55:34 +0100
+
 cookiecutter (1.5.0-1) unstable; urgency=medium
 
   * New upstream release.
