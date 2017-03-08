@@ -1,3 +1,5 @@
 0001-Don-t-test-for-.DS_Store.patch
 0002-Use-PyYAML-instead-of-poyo.patch
 0003-Remove-all-privacy-breach-images-from-documentation.patch
+0004-Added-option-to-strip-template-directory.patch
+0005-Return-generated-context-from-cookiecutter-API.patch

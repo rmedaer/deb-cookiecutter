@@ -1,0 +1,191 @@
+From 4391bcf7776f0c0c18a3884db2d8b3bdcaa19389 Mon Sep 17 00:00:00 2001
+From: Raphael Medaer <raphael@medaer.me>
+Date: Fri, 27 Jan 2017 12:01:14 +0100
+Subject: Added option to strip template directory.
+
+The following commit implements a new feature: stripping the template directory.
+When you create your project based on cookiecutter template, it's using the first
+jinja directory as template directory and render it.
+Even if you specify an output directory it will always create a sub-rendered-directory.
+
+The strip option skip this first template directory and render the boilerplate in
+output directory.
+---
+ cookiecutter/cli.py              | 7 ++++++-
+ cookiecutter/generate.py         | 5 +++--
+ cookiecutter/main.py             | 6 ++++--
+ tests/test_cli.py                | 9 ++++++++-
+ tests/test_specify_output_dir.py | 6 ++++--
+ 5 files changed, 25 insertions(+), 8 deletions(-)
+
+diff --git a/cookiecutter/cli.py b/cookiecutter/cli.py
+index 37c8302..6664cf1 100644
+--- a/cookiecutter/cli.py
++++ b/cookiecutter/cli.py
+@@ -90,10 +90,14 @@ def validate_extra_context(ctx, param, value):
+     u'--debug-file', type=click.Path(), default=None,
+     help=u'File to be used as a stream for DEBUG logging',
+ )
++@click.option(
++    u'--strip', is_flag=True,
++    help=u'Strip template directory',
++)
+ def main(
+         template, extra_context, no_input, checkout, verbose,
+         replay, overwrite_if_exists, output_dir, config_file,
+-        default_config, debug_file):
++        default_config, debug_file, strip):
+     """Create a project from a Cookiecutter project template (TEMPLATE).
+ 
+     Cookiecutter is free and open source software, developed and managed by
+@@ -121,6 +125,7 @@ def main(
+             output_dir=output_dir,
+             config_file=config_file,
+             default_config=default_config,
++            strip=strip
+         )
+     except (OutputDirExistsException,
+             InvalidModeException,
+diff --git a/cookiecutter/generate.py b/cookiecutter/generate.py
+index 4d2f1eb..1a2033b 100644
+--- a/cookiecutter/generate.py
++++ b/cookiecutter/generate.py
+@@ -241,7 +241,7 @@ def _run_hook_from_repo_dir(repo_dir, hook_name, project_dir, context):
+ 
+ 
+ def generate_files(repo_dir, context=None, output_dir='.',
+-                   overwrite_if_exists=False):
++                   overwrite_if_exists=False, strip=False):
+     """Render the templates and saves them to files.
+ 
+     :param repo_dir: Project template input directory.
+@@ -249,6 +249,7 @@ def generate_files(repo_dir, context=None, output_dir='.',
+     :param output_dir: Where to output the generated project dir into.
+     :param overwrite_if_exists: Overwrite the contents of the output directory
+         if it exists.
++    :param strip: Strip project template directory.
+     """
+     template_dir = find_template(repo_dir)
+     logger.debug('Generating project from {}...'.format(template_dir))
+@@ -262,7 +263,7 @@ def generate_files(repo_dir, context=None, output_dir='.',
+     )
+     try:
+         project_dir = render_and_create_dir(
+-            unrendered_dir,
++            unrendered_dir if not strip else '',
+             context,
+             output_dir,
+             env,
+diff --git a/cookiecutter/main.py b/cookiecutter/main.py
+index fd3f1e6..2aab6ef 100644
+--- a/cookiecutter/main.py
++++ b/cookiecutter/main.py
+@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
+ def cookiecutter(
+         template, checkout=None, no_input=False, extra_context=None,
+         replay=False, overwrite_if_exists=False, output_dir='.',
+-        config_file=None, default_config=False):
++        config_file=None, default_config=False, strip=False):
+     """
+     API equivalent to using Cookiecutter at the command line.
+ 
+@@ -42,6 +42,7 @@ def cookiecutter(
+     :param output_dir: Where to output the generated project dir into.
+     :param config_file: User configuration file path.
+     :param default_config: Use default values rather than a config file.
++    :param strip: Strip template directory.
+     """
+     if replay and ((no_input is not False) or (extra_context is not None)):
+         err_msg = (
+@@ -88,5 +89,6 @@ def cookiecutter(
+         repo_dir=repo_dir,
+         context=context,
+         overwrite_if_exists=overwrite_if_exists,
+-        output_dir=output_dir
++        output_dir=output_dir,
++        strip=strip
+     )
+diff --git a/tests/test_cli.py b/tests/test_cli.py
+index a3e1b4f..5361b39 100644
+--- a/tests/test_cli.py
++++ b/tests/test_cli.py
+@@ -97,6 +97,7 @@ def test_cli_replay(mocker, cli_runner):
+         config_file=None,
+         default_config=False,
+         extra_context=None,
++        strip=False,
+     )
+ 
+ 
+@@ -129,6 +130,7 @@ def test_cli_exit_on_noinput_and_replay(mocker, cli_runner):
+         config_file=None,
+         default_config=False,
+         extra_context=None,
++        strip=False,
+     )
+ 
+ 
+@@ -160,6 +162,7 @@ def test_run_cookiecutter_on_overwrite_if_exists_and_replay(
+         config_file=None,
+         default_config=False,
+         extra_context=None,
++        strip=False,
+     )
+ 
+ 
+@@ -219,6 +222,7 @@ def test_cli_output_dir(mocker, cli_runner, output_dir_flag, output_dir):
+         config_file=None,
+         default_config=False,
+         extra_context=None,
++        strip=False,
+     )
+ 
+ 
+@@ -257,6 +261,7 @@ def test_user_config(mocker, cli_runner, user_config_path):
+         config_file=user_config_path,
+         default_config=False,
+         extra_context=None,
++        strip=False
+     )
+ 
+ 
+@@ -283,7 +288,8 @@ def test_default_user_config_overwrite(mocker, cli_runner, user_config_path):
+         output_dir='.',
+         config_file=user_config_path,
+         default_config=True,
+-        extra_context=None
++        extra_context=None,
++        strip=False
+     )
+ 
+ 
+@@ -306,6 +312,7 @@ def test_default_user_config(mocker, cli_runner):
+         config_file=None,
+         default_config=True,
+         extra_context=None,
++        strip=False
+     )
+ 
+ 
+diff --git a/tests/test_specify_output_dir.py b/tests/test_specify_output_dir.py
+index f20ce98..74dc220 100644
+--- a/tests/test_specify_output_dir.py
++++ b/tests/test_specify_output_dir.py
+@@ -54,7 +54,8 @@ def test_api_invocation(mocker, template, output_dir, context):
+         repo_dir=template,
+         context=context,
+         overwrite_if_exists=False,
+-        output_dir=output_dir
++        output_dir=output_dir,
++        strip=False
+     )
+ 
+ 
+@@ -67,5 +68,6 @@ def test_default_output_dir(mocker, template, context):
+         repo_dir=template,
+         context=context,
+         overwrite_if_exists=False,
+-        output_dir='.'
++        output_dir='.',
++        strip=False
+     )

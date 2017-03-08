@@ -11,7 +11,7 @@ to switch to poyo (a pure YAMLish parser).
  2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/cookiecutter/config.py b/cookiecutter/config.py
-index 060e6ca98a82..cd3bd23481e9 100644
+index 060e6ca..cd3bd23 100644
 --- a/cookiecutter/config.py
 +++ b/cookiecutter/config.py
 @@ -13,7 +13,7 @@ import logging
@@ -35,7 +35,7 @@ index 060e6ca98a82..cd3bd23481e9 100644
                  'Unable to parse YAML file {}. Error: {}'
                  ''.format(config_path, e)
 diff --git a/setup.py b/setup.py
-index 5a45b5c3df0f..2805cd0a858e 100644
+index 5a45b5c..2805cd0 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -28,7 +28,7 @@ requirements = [

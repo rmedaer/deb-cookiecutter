@@ -1,0 +1,72 @@
+From 6e8c850057c53ec5d135bc665d436b4f8cc8164a Mon Sep 17 00:00:00 2001
+From: Raphael Medaer <raphael@medaer.me>
+Date: Mon, 6 Mar 2017 10:46:25 +0100
+Subject: Return generated context from cookiecutter API
+
+I patched cookiecutter main function to return both result
+of `generate_files` function and generated context.
+Indeed the generated context is really useful for my application
+which using cookiecutter as Python module.
+---
+ cookiecutter/main.py                      | 2 +-
+ tests/test_cookiecutter_local_no_input.py | 4 ++--
+ tests/test_custom_extensions_in_hooks.py  | 2 +-
+ tests/test_default_extensions.py          | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/cookiecutter/main.py b/cookiecutter/main.py
+index 2aab6ef..4f2fef7 100644
+--- a/cookiecutter/main.py
++++ b/cookiecutter/main.py
+@@ -91,4 +91,4 @@ def cookiecutter(
+         overwrite_if_exists=overwrite_if_exists,
+         output_dir=output_dir,
+         strip=strip
+-    )
++    ), context['cookiecutter']
+diff --git a/tests/test_cookiecutter_local_no_input.py b/tests/test_cookiecutter_local_no_input.py
+index 885da18..d83f18d 100644
+--- a/tests/test_cookiecutter_local_no_input.py
++++ b/tests/test_cookiecutter_local_no_input.py
+@@ -81,13 +81,13 @@ def test_cookiecutter_templated_context():
+ @pytest.mark.usefixtures('clean_system', 'remove_additional_dirs')
+ def test_cookiecutter_no_input_return_project_dir():
+     """Call `cookiecutter()` with `no_input=True`."""
+-    project_dir = main.cookiecutter('tests/fake-repo-pre', no_input=True)
++    project_dir, _ = main.cookiecutter('tests/fake-repo-pre', no_input=True)
+     assert project_dir == os.path.abspath('fake-project')
+ 
+ 
+ @pytest.mark.usefixtures('clean_system', 'remove_additional_dirs')
+ def test_cookiecutter_dict_values_in_context():
+-    project_dir = main.cookiecutter('tests/fake-repo-dict', no_input=True)
++    project_dir, _ = main.cookiecutter('tests/fake-repo-dict', no_input=True)
+     assert project_dir == os.path.abspath('fake-project-dict')
+ 
+     with open(os.path.join(project_dir, 'README.md')) as fh:
+diff --git a/tests/test_custom_extensions_in_hooks.py b/tests/test_custom_extensions_in_hooks.py
+index c90be5f..63d143f 100644
+--- a/tests/test_custom_extensions_in_hooks.py
++++ b/tests/test_custom_extensions_in_hooks.py
+@@ -33,7 +33,7 @@ def modify_syspath(monkeypatch):
+ 
+ 
+ def test_hook_with_extension(template, output_dir):
+-    project_dir = main.cookiecutter(
++    project_dir, _ = main.cookiecutter(
+         template,
+         no_input=True,
+         output_dir=output_dir,
+diff --git a/tests/test_default_extensions.py b/tests/test_default_extensions.py
+index a1d15a1..482be74 100644
+--- a/tests/test_default_extensions.py
++++ b/tests/test_default_extensions.py
+@@ -18,7 +18,7 @@ def freeze():
+ 
+ 
+ def test_jinja2_time_extension(tmpdir):
+-    project_dir = cookiecutter(
++    project_dir, _ = cookiecutter(
+         'tests/test-extensions/default/',
+         no_input=True,
+         output_dir=str(tmpdir)

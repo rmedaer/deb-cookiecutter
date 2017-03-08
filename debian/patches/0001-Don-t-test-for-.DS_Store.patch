@@ -9,7 +9,7 @@ This file is excluded during extraction by dpkg-source.
  1 file changed, 2 deletions(-)
 
 diff --git a/tests/test_generate_files.py b/tests/test_generate_files.py
-index f71192f1a6d4..b425fc6d8000 100644
+index f71192f..b425fc6 100644
 --- a/tests/test_generate_files.py
 +++ b/tests/test_generate_files.py
 @@ -112,11 +112,9 @@ def test_generate_files_binaries():

@@ -10,7 +10,7 @@ Subject: Remove all privacy-breach images from documentation
  create mode 120000 docs/cookiecutter_medium.png
 
 diff --git a/README.rst b/README.rst
-index 23b67be52f0c..15afbb9bff52 100644
+index 23b67be..15afbb9 100644
 --- a/README.rst
 +++ b/README.rst
 @@ -2,33 +2,6 @@
@@ -58,7 +58,7 @@ index 23b67be52f0c..15afbb9bff52 100644
  
 diff --git a/docs/cookiecutter_medium.png b/docs/cookiecutter_medium.png
 new file mode 120000
-index 000000000000..a643810a7e7f
+index 0000000..a643810
 --- /dev/null
 +++ b/docs/cookiecutter_medium.png
 @@ -0,0 +1 @@
